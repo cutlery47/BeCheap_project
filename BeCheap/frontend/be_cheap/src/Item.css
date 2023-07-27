@@ -1,0 +1,16 @@
+.item {
+    display: inline-block;
+    width: 200px;
+    margin: 15px;
+
+}
+
+.item_image img {
+    display: block;
+    height: 200px
+
+}
+
+.item_descript span {
+    display: block;
+}
