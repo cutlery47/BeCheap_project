@@ -25,8 +25,6 @@ from BeCheap import settings
 urlpatterns = [
     path('Drochila/', admin.site.urls),
     path('api/v1/', include('mainPage.urls')),
-    path('api/v1/',include('Categorylogic.urls')),
-    path('api/v1/',include('ItemLogic.urls')),
 ]
 
 if settings.DEBUG:
