@@ -10,11 +10,4 @@ from rest_framework.response import Response
 from mainPage.serializer import ItemsSerializer
 
 
-class MixinForSlug():
-    lookup_field = 'item_slug'
-    lookup_url_kwarg = 'slug_item'
 
-
-class GetItemView(MixinForSlug, generics.RetrieveAPIView):
-    serializer_class = ItemsSerializer
-    queryset = Items.objects.all()

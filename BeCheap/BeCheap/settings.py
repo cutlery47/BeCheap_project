@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'mainPage.apps.MainpageConfig',
     'UserFunctional.apps.UserfunctionalConfig',
-    'Categorylogic.apps.CategorylogicConfig',
-    'ItemLogic.apps.ItemlogicConfig',
     'rest_framework',
 ]
 
