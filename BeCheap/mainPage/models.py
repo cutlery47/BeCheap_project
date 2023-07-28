@@ -29,7 +29,7 @@ class Items(models.Model):
     def save(self, *args, **kwargs):
         if not self.id:
             # Newly created object, so set slug
-            self.item_slug = slugify(self.item_name)
+            self.slug = slugify(self.item_name)
         super(Items, self).save(*args, **kwargs)
 
     class Meta:

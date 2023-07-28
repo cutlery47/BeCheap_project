@@ -13,3 +13,8 @@ class ItemsSerializer(serializers.ModelSerializer):
                   'item_link',
                   'item_date',
                   'item_image']
+
+
+# class CreateFavorite(serializers.ModelSerializer):
+#     def create(self, validate_data):
+#         favorite =

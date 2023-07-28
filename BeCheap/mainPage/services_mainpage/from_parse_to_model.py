@@ -5,7 +5,7 @@ from django.core.wsgi import get_wsgi_application
 
 application = get_wsgi_application()
 from mainPage.models import Items, Categories
-from mainPage.services.parser import get_parse_data
+from mainPage.services_mainpage.parser import get_parse_data
 
 
 class Parse_to_model:
