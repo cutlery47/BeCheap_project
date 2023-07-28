@@ -5,7 +5,7 @@ from django.template.defaultfilters import slugify
 # Create your models here.
 class Categories(models.Model):
     category_name = models.CharField(max_length=100)
-    category_slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
 
     def __str__(self):
         return self.category_name
@@ -17,7 +17,7 @@ class Categories(models.Model):
 
 class Items(models.Model):
     item_name = models.CharField(max_length=100)
-    item_slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     item_brand = models.CharField(max_length=20)
     item_category = models.ForeignKey(Categories, on_delete=models.CASCADE, null=False, related_name='categories')
     item_cur_price = models.CharField(max_length=20)

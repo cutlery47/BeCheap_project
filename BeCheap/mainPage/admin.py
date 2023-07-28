@@ -7,15 +7,15 @@ from .models import *
 
 
 class Item_Admin(admin.ModelAdmin):
-    list_display = ("item_name", "item_category", "item_slug")
-    list_display_links = ("item_name", "item_category", "item_slug")
-    prepopulated_fields = {"item_slug": ("item_name",)}
+    list_display = ("item_name", "item_category", "slug")
+    list_display_links = ("item_name", "item_category", "slug")
+    prepopulated_fields = {"slug": ("item_name",)}
 
 
 class Category_Admin(admin.ModelAdmin):
     list_display = ("category_name",)
     list_display_links = ("category_name",)
-    prepopulated_fields = {"category_slug": ("category_name",)}
+    prepopulated_fields = {"slug": ("category_name",)}
 
 
 admin.site.register(Categories, Category_Admin)
