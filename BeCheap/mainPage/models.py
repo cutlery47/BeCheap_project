@@ -14,6 +14,11 @@ class Categories(models.Model):
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
 
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.category_name)
+        super(Categories, self).save(*args, **kwargs)
+
+
 
 class Items(models.Model):
     item_name = models.CharField(max_length=100)

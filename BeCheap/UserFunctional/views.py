@@ -10,14 +10,17 @@ from .serializer import FavoritesSerializer
 
 
 class AddToFavoriteView(APIView):
-
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    def get(self, request):
+        queryset = Favorite.objects.all()
+        serializer = FavoritesSerializer(queryset, many=True)
+        return Response(serializer.data)
     def post(self, request):
-
         serializer = FavoritesSerializer(data=request.data)
-
-        if serializer.is_valid():
-            serializer.save()
-            return Response({"message": "Хуйня"})
-        else:
-            print(serializer.errors)
-            return Response({"message": "Хуйня переделывай"})
+        try:
+            serializer.is_valid(raise_exception=True)
+            if serializer.save():
+                return Response({"message": "Добавлено в избранное"})
+            return Response({"message": "Удалено из избранного"})
+        except:
+            return Response({"errors": serializer.errors})

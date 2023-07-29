@@ -1,23 +1,26 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
+from rest_framework.response import Response
 
 from mainPage.models import Items
-from .models import Favorite, User_Huly
+from .models import Favorite
 
 
 class FavoritesSerializer(serializers.ModelSerializer):
     item = serializers.SlugRelatedField(slug_field='slug', queryset=Items.objects)
-    user = serializers.SlugRelatedField(slug_field='user_name', queryset=User_Huly.objects)
+    user = serializers.SlugRelatedField(slug_field='user_name', queryset=User.objects)
     class Meta:
         model = Favorite
         fields = ["item", "user"]
     def create(self, validated_data):
-        new_obj, created = Favorite.objects.get_or_create(**validated_data)
+        new_obj, created = Favorite.objects.get_or_create(
+            item=validated_data.get("item"),
+            user=validated_data.get("user")
+        )
         if not created:
             new_obj.delete()
-            print("Было")
             return False
         else:
-            print("Добавлено")
             return created
 
 
