@@ -7,6 +7,7 @@ from rest_framework.authtoken.admin import User
 class Categories(models.Model):
     category_name = models.CharField(max_length=100)
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
+    subscriptions = models.ManyToManyField(User, related_name="subscriptions_categories")
 
     def __str__(self):
         return self.category_name
@@ -30,7 +31,7 @@ class Items(models.Model):
     item_link = models.URLField(max_length=300, null=True)
     item_date = models.TimeField(auto_now=True)
     item_image = models.URLField(max_length=300, null=True)
-    favorites = models.ManyToManyField(User, related_name="user", null=True, through='Favorite')
+    favorites = models.ManyToManyField(User, related_name="user", through='Favorite')
 
     def __str__(self):
         return self.slug
