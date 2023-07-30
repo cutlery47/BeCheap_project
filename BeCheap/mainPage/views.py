@@ -2,8 +2,8 @@ from rest_framework import permissions, generics, viewsets
 from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 
-from UserFunctional.models import Favorite
-from .mixins import SlugMixin
+
+from .mixins import SlugMixin, CreateFavorite
 from .models import Items, Categories
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -36,3 +36,17 @@ class GetListByCategory(viewsets.ViewSet):
         queryset = Categories.objects.get(slug=slug).categories.all()
         serializer = ItemsSerializer(queryset, many=True)
         return Response(serializer.data)
+
+
+class AddToFavorite(CreateFavorite, APIView):
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    def post(self, request, item_id):
+        query = self.add_to_favorites(request, Items, pk=item_id)
+        if query:
+            return Response({"message": "Добавлено в избранное"})
+        return Response({"message": "Удалено из избранного"})
+    def post(self, request, item_slug):
+        query = self.add_to_favorites(request, Items, slug=item_slug)
+        if query:
+            return Response({"message": "Добавлено в избранное"})
+        return Response({"message": "Удалено из избранного"})

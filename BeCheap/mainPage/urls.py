@@ -11,6 +11,7 @@ router.register(r'items', views.GetItemsView)
 
 urlpatterns = [
     path('items/category/<slug:slug>', views.GetListByCategory.as_view({'get': 'list'})),
+    path('items/add/<int:item_id>', views.AddToFavorite.as_view())
 ]
 
 urlpatterns += router.urls

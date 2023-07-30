@@ -3,12 +3,12 @@ from rest_framework import serializers
 from rest_framework.response import Response
 
 from mainPage.models import Items
-from .models import Favorite
+from mainPage.models import Favorite
 
 
 class FavoritesSerializer(serializers.ModelSerializer):
     item = serializers.SlugRelatedField(slug_field='slug', queryset=Items.objects)
-    user = serializers.SlugRelatedField(slug_field='user_name', queryset=User.objects)
+    user = serializers.SlugRelatedField(slug_field='username', queryset=User.objects)
     class Meta:
         model = Favorite
         fields = ["item", "user"]

@@ -7,5 +7,5 @@ from . import views
 """А мне неявное создание URL'а дороже 4х строк кода"""
 
 urlpatterns = [
-    path('pos/items', views.AddToFavoriteView.as_view())
+
 ]
