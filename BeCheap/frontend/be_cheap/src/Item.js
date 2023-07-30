@@ -1,75 +1,77 @@
 import React from "react";
+import {useState, useEffect} from "react";
 import './Item.css'
+import _ from 'lodash'
 
-//íàñëåäóåì êëàññ îò React.Component
-class Item extends React.Component{
-    constructor() {
-        //êîíñòðóêòîð êëàññà ðîäèòåëÿ (êàê ÿ ïîíèìàþ ýòî React.Component)
-        super();
-        //÷åñòíî, õç íàõóé òóò state
-        //ïî÷åìó íåëüçÿ þçàòü ïðîñòî ïàðàìåòð êëàññà...
-        //ïðåäñòîèò ðàçîáðàòüñÿ
-        this.state = {
-            item_data: []
-        }
+//Ð½Ð°ÑÐ»ÐµÐ´ÑƒÐµÐ¼ ÐºÐ»Ð°ÑÑ Ð¾Ñ‚ React.Component
+function Item(props) {
 
-        this.info = new Object
+  let [item_data, setItems] = useState([]);
+  let [rows, setRows] = useState(null);
+
+  function fetchData() {
+      //Ð±ÐµÑ€ÐµÐ¼ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ñ ÑÐµÑ€Ð²Ð°ÐºÐ° Ð¸ Ð¾Ð±Ð½Ð¾Ð²Ð°Ð»ÑÐµÐ¼ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð´Ð»Ñ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ Item
+      fetch('http://127.0.0.1:8000/api/v1/items/').then(response=> response.json())
+      .then((data)=> setItems(hz_kak_nazvat(data)));
+  }
+
+  //ÐºÐ¾Ð½Ð²ÐµÑ€Ñ‚Ð¸Ñ€ÑƒÐµÐ¼ Ð½ÐµÐ¿Ð¾Ð½ÑÑ‚Ð½ÑƒÑŽ Ñ…ÑƒÐµÑ‚Ñƒ Ð² Ð¿Ð¾Ð½ÑÑ‚Ð½ÑƒÑŽ Ñ…ÑƒÐµÑ‚Ñƒ
+  function hz_kak_nazvat(data) {
+    const proper_objects = [];
+
+    for (const dat of data) {
+      let info = new Object();
+      Object.assign(info, dat);
+      proper_objects.push(info) 
     }
 
-    fetchData() {
-        //áåðåì äàííûå ñ ñåðâàêà è îáíîâàëÿåì äàííûå äëÿ êàæäîãî Item
-        fetch('http://127.0.0.1:8000/api/v1/items/').then(response=> response.json())
-        .then((data)=>{
-            this.setState({
-                item_data:data
-            });
-        });
-    }
+    return proper_objects;
+  }
 
-    //ìåòîä, êîòîðûé âûçûâàåò ôåò÷ ñðàçó ïîñëå ðåíäåðèíãà êîìïîíåíòà
-    componentDidMount() {
-        this.fetchData();
-    }
-
-    //render - ìåòîä, âîçâðàùàþùèé ñîäåðæàíèå React.Component-îáúåêòà (ó íàñ ýòî Item)
-    //íó òèïî ïðîñòî ðåíäåðèò õóåòó
-    render() {
-      const allData = this.state.item_data;
-      let proper_objects = []
-
-      for (const data of allData) {
-        let info = new Object;
-        Object.assign(info, data);
-        proper_objects.push(info) 
-      }
-      
-      const rows=proper_objects.map((obj)=>
-      <div className='item'>
-          <div className = "item_image">
-               <img src={obj.item_image}/>
-         </div>
-          <div className="item_descript">
+  function render_items(proper_objects) {
+    //Ð´Ð»Ñ ÐºÐ°Ð¶Ð´Ð¾Ð³Ð¾ Ð¾Ð±ÑŠÐµÐºÑ‚Ð° ÑÐ¾Ð·Ð´Ð°ÑŽ html Ð±Ð»Ð¾Ðº
+    const rows=proper_objects.map((obj)=>
+    <div className='item'>
+        <div className = "item_image">
+              <img src={obj.item_image}/>
+        </div>
+        <div className="item_descript">
+        <span>
+            <b>Name:</b> {obj.item_name}
+          </span>
           <span>
-              <b>Name:</b> {obj.item_name}
-            </span>
-            <span>
-              <b>Category:</b> {obj.item_category}
-            </span>
-            <span>
-              <b>Price:</b> {obj.item_cur_price} <strike> {obj.item_prev_price} </strike>
-            </span>
-          </div>
-      </div>
-      )
-        return (
-          <div class="clothing">
-            <style>
-               <link rel="stylesheet" href="Item.css" type="text/css"/>
-            </style>
-            {rows}
-          </div>
-        );
+            <b>Category:</b> {obj.item_category}
+          </span>
+          <span>
+            <b>Price:</b> {obj.item_cur_price} <strike> {obj.item_prev_price} </strike>
+          </span>
+        </div>
+    </div>
+    )
+
+      return rows;
     }
+
+    //Ð¼ÐµÑ‚Ð¾Ð´, ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¹ Ð²Ñ‹Ð·Ñ‹Ð²Ð°ÐµÑ‚ Ñ„ÐµÑ‚Ñ‡ ÑÑ€Ð°Ð·Ñƒ Ð¿Ð¾ÑÐ»Ðµ Ñ€ÐµÐ½Ð´ÐµÑ€Ð¸Ð½Ð³Ð° ÐºÐ¾Ð¼Ð¿Ð¾Ð½ÐµÐ½Ñ‚Ð°
+    //Ð²Ñ‚Ð¾Ñ€Ñ‹Ð¼ Ð°Ñ€Ð³ÑƒÐ¼ÐµÐ½Ñ‚Ð¾Ð¼ Ð²Ð¾Ð·Ð²Ñ€Ð°Ñ‰Ð°ÑŽ dependency array
+    //ÑÑ‚Ð¾ Ð·Ð½Ð°Ñ‡Ð¸Ñ‚ Ñ‡Ñ‚Ð¾ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ñ„ÐµÑ‚Ñ‡Ð°ÑŽÑ‚ÑÑ Ñ‚Ð¾Ð»ÑŒÐºÐ¾ Ð¿Ñ€Ð¸ Ð¿ÐµÑ€Ð²Ð¾Ð¼ Ñ€ÐµÐ½Ð´ÐµÑ€Ðµ (Ð¸Ð½Ð¾Ð³Ð´Ð° Ð²Ñ‹Ð·Ñ‹Ð²Ð°ÐµÑ‚ Ð¾ÑˆÐ¸Ð±ÐºÑƒ -- Ñ…Ð·)
+    useEffect(() => {
+      fetchData();
+    }, []); 
+
+    //Ð¿Ñ€Ð¸ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ð¸ Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð¾Ð´ÐµÐ¶Ð´Ñ‹ - Ñ€ÐµÑ€ÐµÐ½Ð´ÐµÑ€Ð¸Ð¼
+    useEffect(() => setRows(render_items(item_data)), [item_data]);
+
+    //Ð¿Ñ€Ð¸ Ð¸Ð·Ð¼ÐµÐ½ÐµÐ½Ð¸Ð¸ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ is_sorted - Ð¼ÐµÐ½ÑÐµÐ¼ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ñ Items Ð¸ Ñ€ÐµÐ½Ð´ÐµÑ€Ð¸Ð¼
+    useEffect(() => {
+        setItems(_.sortBy(item_data, 'item_name'))
+    }, [props.is_sorted])
+
+    return (
+      <div className="clothing">
+        {rows}
+      </div>
+    )
 }
 
 export default Item;

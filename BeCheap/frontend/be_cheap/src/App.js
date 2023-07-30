@@ -1,7 +1,10 @@
-import React from "react";
+import React from 'react'
+import InterfaceMain from './InterfaceMain'
 
 function App() {
-  return null;
+  return (
+    <InterfaceMain/>
+  )
 }
 
-export default App;
+export default App

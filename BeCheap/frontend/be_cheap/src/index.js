@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './App';
-import Item from './Item';
+import App from "./InterfaceMain"
 
 //тут создается root элемент React DOM
 //React DOM - это объект, который заменяет какой-то кусок исходного DOM (как я понял)
@@ -12,7 +11,6 @@ import Item from './Item';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
-    <Item />
+    <App/>
   </React.StrictMode>
 );

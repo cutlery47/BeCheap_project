@@ -1,17 +1,30 @@
+.clothing {
+    display: block;
+}
+
 .item {
     display: inline-block;
-    width: 200px;
     height: 200px;
-    margin: 15px;
-
+    width: 200px;
+    margin-block: 20px;
+    margin-left: 12px;
 }
 
-.item_image img {
+.item .item_image{
     display: block;
-    height: 200px
+    height: 200px;
+    width: 200px;
 
 }
 
-.item_descript span {
+.item .item_image img {
+    display: block;
+    height: 200px;
+    width: 200px;
+
+}
+
+.item .item_descript span {
+    height: 40px;
     display: block;
 }
