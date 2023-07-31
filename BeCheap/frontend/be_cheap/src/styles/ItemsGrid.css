@@ -4,7 +4,6 @@
 
 .item {
     display: inline-block;
-    height: 200px;
     width: 200px;
     margin-block: 20px;
     margin-left: 12px;
@@ -26,5 +25,9 @@
 
 .item .item_descript span {
     height: 40px;
+    display: block;
+}
+
+.item .item_descript span button {
     display: block;
 }

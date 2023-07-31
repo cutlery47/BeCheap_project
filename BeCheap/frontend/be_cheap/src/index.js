@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from "./InterfaceMain"
+import App from "./main_page/InterfaceMain"
 
 //тут создается root элемент React DOM
 //React DOM - это объект, который заменяет какой-то кусок исходного DOM (как я понял)
