@@ -1,23 +1,38 @@
 import React, { useEffect, useState } from 'react'
 import ItemsGrid from './ItemsGrid'
 import Pannel from './Pannel'
+import AuthPopup from '../authentification/AuthPopup';
 
 function InterfaceMain() {
 
+  //========================USER_DATA============================
+  let[is_logged, setLogged] = useState(false)
+
+  //========================BUTTONS==============================
   //state-переменные, которые хранят состояния кнопок (нажаты/нет)
   //передаем их в младшие компоненты
-  let [is_sorted, setSortClicked] = useState(false);
-  let [is_authorized, setAuthClicked] = useState(false);
+  let [sort_clothes, setClothesSortClicked] = useState(false);
+  let [authorize, setAuthClicked] = useState(false);
 
   return (
     <div className="everything">
+      <div className='main_page'>
+
+      </div>
         <Pannel 
-        is_sorted={is_sorted} setSortClicked={setSortClicked}
-        is_authorized={is_authorized} setAuthClicked={setAuthClicked}/>
+        sort_clothes={sort_clothes} setClothesSortClicked={setClothesSortClicked}
+        authorize={authorize} setAuthClicked={setAuthClicked}/>
 
         <ItemsGrid 
-        is_sorted={is_sorted} setSortClicked={setSortClicked}
-        is_authorized={is_authorized} setAuthClicked={setAuthClicked}/>
+        sort_clothes={sort_clothes} setClothesSortClicked={setClothesSortClicked}
+        authorize={authorize} setAuthClicked={setAuthClicked}/>
+
+      <div className='popups'>
+        <AuthPopup 
+        authorize={authorize} setAuthClicked={setAuthClicked} 
+        is_logged={is_logged} setLogged={setLogged}/>
+      </div>
+        
     </div>
   )
 }

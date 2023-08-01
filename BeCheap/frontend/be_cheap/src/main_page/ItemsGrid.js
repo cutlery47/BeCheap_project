@@ -8,7 +8,7 @@ function ItemsGrid(props) {
 
   let [item_data, setItems] = useState([]);
   let [rows, setRows] = useState(null);
-  let [favorites, setFavs] = useState([]);
+  // let [favorites, setFavs] = useState([]);
   
 
   function fetchData() {
@@ -28,10 +28,6 @@ function ItemsGrid(props) {
     }
 
     return proper_objects;
-  }
-
-  function add_to_favs(state, value) {
-    setFavs(favorites.push(value))
   }
 
   function render_items(proper_objects) {
@@ -56,7 +52,7 @@ function ItemsGrid(props) {
     //при изменении значения is_sorted - меняем значения Items и рендерим
     useEffect(() => {
         setItems(_.sortBy(item_data, 'item_name'))
-    }, [props.is_sorted])
+    }, [props.sort_clothes])
 
     return (
       <div className="clothing">

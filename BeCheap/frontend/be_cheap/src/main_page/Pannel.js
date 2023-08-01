@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import '../styles/Pannel.css'
+import '../authentification/AuthPopup'
 
 function Pannel(props) { 
 
@@ -13,10 +14,10 @@ function Pannel(props) {
             </div>  
             {/* будем изменять значение is_sorted при нажатии на кнопку */}
             <div className="buttons">
-                <button class="button" role="button" onClick={() => props.setSortClicked(!props.is_sorted)}>
+                <button className="button" role="button" onClick={() => props.setClothesSortClicked(!props.is_sorted)}>
                     Sort
                 </button>
-                <button class="button" id="auth_btn" onClick={() => {props.setAuthClicked(!props.is_authorized)}}>
+                <button className="button" id="auth_btn" onClick={() => {props.setAuthClicked(!props.authorize)}}>
                     Sign Up / Log in
                 </button>
                 <button class="button">
