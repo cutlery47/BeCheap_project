@@ -25,6 +25,8 @@ from rest_framework_simplejwt.views import (
 )
 
 
+# http://127.0.0.1:8000/auth/token/login/
+# http://127.0.0.1:8000/auth/users/
 
 urlpatterns = [
     path('Drochila/', admin.site.urls),
