@@ -16,13 +16,14 @@ Including another URLconf
 """
 from django.conf.urls.static import static
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import re_path, path, include
 from BeCheap import settings
 from rest_framework_simplejwt.views import TokenVerifyView
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
+from .yasg import urlpatterns as doc_patterns
 
 
 # http://127.0.0.1:8000/auth/token/login/
@@ -38,6 +39,8 @@ urlpatterns = [
     path('auth/', include('djoser.urls')),
     path('api/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
 ]
+
+urlpatterns += doc_patterns
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
