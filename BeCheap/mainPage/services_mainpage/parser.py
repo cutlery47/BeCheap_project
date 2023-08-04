@@ -29,7 +29,7 @@ class Parser:
         # переменные чтобы дебагалось легче
         CLOTHES_PER_PAGE = 120
         height = 0
-        scroll_frequency = 0.3
+        scroll_frequency = 0.2
         scroll_speed = 500
 
         # xml path кнопки перехода на другую страницу

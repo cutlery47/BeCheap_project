@@ -3,7 +3,6 @@ import '../styles/Pannel.css'
 import '../authentification/AuthPopup'
 
 function Pannel(props) { 
-
     let rows = 
     <>
         <div className="upper_pannel">
@@ -17,11 +16,30 @@ function Pannel(props) {
                 <button className="button" role="button" onClick={() => props.setClothesSortClicked(!props.is_sorted)}>
                     Sort
                 </button>
-                <button className="button" id="auth_btn" onClick={() => {props.setAuthClicked(!props.authorize)}}>
-                    Sign Up / Log in
+                <button className="button" id="auth_btn" onClick={() => 
+                    {
+                    //просто оставлю на всякий лог токена
+                    console.log(props.userToken)
+                    //работает только если токена
+                    if (props.userToken == 'None') {
+                        props.setAuthClicked(!props.authorize)
+                    }
+                    }}>
+                    <span id="sign_btn_txt">
+                        Sign Up / Log in
+                    </span>
                 </button>
-                <button class="button">
-                  Profile
+                <button class="button" id="profile_btn" onClick={() => 
+                    {
+                    //работает только если токена
+                    if (props.userToken == 'None') {
+                        props.setAuthClicked(!props.authorize)
+                    }
+                    }}>
+
+                    <span id="usrname_txt">
+                        Profile
+                    </span>
                 </button>
             </div>
         </div>

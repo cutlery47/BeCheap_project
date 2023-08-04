@@ -76,3 +76,10 @@
     left: 24%;
     position: absolute;
 }
+
+.error_msg {
+    position: absolute;
+    bottom: 20%;
+    left: 40%;
+    color: red;
+}

@@ -10,7 +10,6 @@ function ItemsGrid(props) {
   let [rows, setRows] = useState(null);
   // let [favorites, setFavs] = useState([]);
   
-
   function fetchData() {
       //берем данные с сервака и обноваляем данные для каждого Item
       fetch('http://127.0.0.1:8000/api/v1/items/').then(response=> response.json())
