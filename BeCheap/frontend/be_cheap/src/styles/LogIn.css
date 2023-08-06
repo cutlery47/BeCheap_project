@@ -41,3 +41,13 @@
     left: 18%;
     position: absolute;
 }
+
+#error_msg {
+    display: block;
+    position: absolute;
+    max-width: 100px;
+    left: 39.5%;
+    bottom: 12%;
+    text-align: center;
+    color: red;
+}

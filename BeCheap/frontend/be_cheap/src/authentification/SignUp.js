@@ -3,7 +3,6 @@ import '../styles/SignUp.css'
 
 function SignUp(props) {
   let [formsData, setFormsData] = useState([])
-  let [errCode, setErrCode] = useState(0)
 
   useEffect(() => {
     //при вводе данных для регистрации производится два пост-запроса
@@ -32,16 +31,16 @@ function SignUp(props) {
         if (signup_status == true) {
           console.log("signed up successfully!");
         } else {
+          const span = document.getElementById("error_msg")
           //вывожу ошибки в консоль (если были)
-          if (data.password != undefined) {
-            console.log("password: " + data.password)
-            // sendErrorMsg(1)
-          } else if (data.username != undefined) {
-            console.log("username: " + data.username)
-            //sendErrorMsg(2)
+          if (data.username != undefined) {
+            span.textContent=("Login: " + data.username[0])
+          } else if (data.password != undefined) {
+            span.textContent=("Password: " + data.password[0])
+          } else if (data.non_field_errors != undefined) {
+            span.textContent=("Error: " + data.non_field_errors[0])
           } else {
             console.log(data)
-            //sendErrorMsg(3) 
           }
         }
       }).then(() => {
@@ -70,34 +69,6 @@ function SignUp(props) {
       
     }
   }, [formsData])
-
-
-  //проверка на ошибки ввода данных в формы
-  function sendErrorMsg() {
-    if (errCode === 1) {
-      return(
-        <span className='error_msg'>
-          Passwords don't match!
-        </span>
-      )
-    }
-
-    if (errCode === 2) {
-      return(
-        <span className='error_msg'>
-          No login entered
-        </span>
-      )
-    }
-
-    if (errCode === 3) {
-      return(
-        <span className='error_msg'>
-          Ny tipo hyeta
-        </span>
-      )
-    }
-  }
 
   return (
     <div className="sign_up">
@@ -142,13 +113,16 @@ function SignUp(props) {
               data_arr.push(dat.value)
             }
             
-            setFormsData(data_arr);
-            //доделать проверку
+            if (data_arr[1] == data_arr[2]) {
+              setFormsData(data_arr);
+            }
 
             }}>
               Sign Up!
           </button>
-          {sendErrorMsg()}
+          <span id="error_msg">
+            
+          </span>
       </div>
     </div>
   )

@@ -16,7 +16,7 @@
     
     position: relative;
     padding: 300px 200px 300px 200px;
-    max-width: 640px;
+    max-width: 50px;
     background-color: #FFF;
 }
 
@@ -77,9 +77,13 @@
     position: absolute;
 }
 
-.error_msg {
+#error_msg {
+    display: block;
     position: absolute;
-    bottom: 20%;
-    left: 40%;
+    max-width: 100px;
+    left: 39.5%;
+    bottom: 12%;
+    text-align: center;
     color: red;
 }
+

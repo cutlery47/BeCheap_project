@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import ItemsGrid from './ItemsGrid'
 import Pannel from './Pannel'
 import AuthPopup from '../authentification/AuthPopup';
+import Cookies from 'js-cookie'
 
 function InterfaceMain() {
   //========================USER_DATA============================
@@ -12,15 +13,26 @@ function InterfaceMain() {
 
   useEffect(() => {
     if (userToken != "None") {
-      document.getElementById("sign_btn_txt").textContent="Logged in successfully!"
+      document.getElementById("sign_btn_txt").textContent="Change account"
+      Cookies.set('token', userToken)
     }
   }, [userToken])
 
   useEffect(() => {
     if (userName != "None") {
       document.getElementById("usrname_txt").textContent=userName
+      Cookies.set('username', userName);
     }
   }, [userName])
+
+  useEffect(() => {
+    if (Cookies.get('token') != undefined) {
+      setUserToken(Cookies.get('token'));
+      setUserName(Cookies.get('username'));
+    }
+    
+    
+  }, [])
 
   //========================BUTTONS==============================
   //state-переменные, которые хранят состояния кнопок (нажаты/нет)

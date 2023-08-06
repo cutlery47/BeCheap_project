@@ -20,10 +20,7 @@ function Pannel(props) {
                     {
                     //просто оставлю на всякий лог токена
                     console.log(props.userToken)
-                    //работает только если токена
-                    if (props.userToken == 'None') {
-                        props.setAuthClicked(!props.authorize)
-                    }
+                    props.setAuthClicked(!props.authorize)
                     }}>
                     <span id="sign_btn_txt">
                         Sign Up / Log in
@@ -31,10 +28,7 @@ function Pannel(props) {
                 </button>
                 <button class="button" id="profile_btn" onClick={() => 
                     {
-                    //работает только если токена
-                    if (props.userToken == 'None') {
                         props.setAuthClicked(!props.authorize)
-                    }
                     }}>
 
                     <span id="usrname_txt">

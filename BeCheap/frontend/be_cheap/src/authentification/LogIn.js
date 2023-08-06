@@ -3,7 +3,6 @@ import '../styles/LogIn.css'
 
 function LogIn(props) {
   let [formsData, setFormsData] = useState([])
-  let [errCode, setErrCode] = useState(0)
 
   useEffect(() => {
     let login_status = false
@@ -32,19 +31,16 @@ function LogIn(props) {
 
           document.getElementById("close").click()
         } else {
+          const span = document.getElementById("error_msg")
           //вывожу ошибки в консоль (если были)
-          if (data.password != undefined) {
-            console.log("password: " + data.password)
-            // sendErrorMsg(1)
-          } else if (data.username != undefined) {
-            console.log("username: " + data.username)
-            //sendErrorMsg(2)
+          if (data.username != undefined) {
+            span.textContent=("Login: " + data.username[0])
+          } else if (data.password != undefined) {
+            span.textContent=("Password: " + data.password[0])
           } else if (data.non_field_errors != undefined) {
-            console.log("an error occured: " + data.non_field_errors)
-            //sendErrorMsg(2)
+            span.textContent=("Error: " + data.non_field_errors[0])
           } else {
             console.log(data)
-            //sendErrorMsg(3) 
           }
         }
       })
@@ -92,6 +88,9 @@ function LogIn(props) {
             }}>
               Log in!
           </button>
+          <span id="error_msg">
+
+          </span>
         
       </div>
     </div>
