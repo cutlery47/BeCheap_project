@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'djoser',
     'rest_framework.authtoken',
-    'drf_yasg'
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -209,6 +209,21 @@ LOGGING = {
 
 }
 
+
+
+CACHE_TTL = 60 * 15
+ITEMS_CACHE_NAME = 'items'
+CATEGORY_CACHE_NAME = 'categories'
+CELERY_BROKER_URL = 'redis://127.0.0.1:6379/1'
+CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/1'
+CELERY_ACCEPT_CONTENT = {'application/json'}
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY_BROKER_CONNECTION_RETRY = True
+
+
 CACHES = {
     "default": {
         "BACKEND": "django.core.cache.backends.redis.RedisCache",
@@ -219,6 +234,4 @@ CACHES = {
     }
 }
 
-CACHE_TTL = 60 * 15
-ITEMS_CACHE_NAME = 'items'
-CATEGORY_CACHE_NAME = 'categories'
+

@@ -61,7 +61,7 @@ class Parser:
         # const
         count = 0
         # объект супа
-        self.soup = BeautifulSoup(self.getFullPage_End(1), 'lxml')
+        self.soup = BeautifulSoup(self.getFullPage_End(3), 'lxml')
 
         # перемещение по html-дереву (по сути хардкод)
         pointer = self.soup.find(id='app-container').find_next('div', style='opacity:1')
@@ -129,4 +129,8 @@ class Parser:
 def get_parse_data():
     parsr = Parser('https://www.endclothing.com/ru/sale?page=1')
     parsr.getPrices_End()
-    return parsr.prices
+    parser_dict = dict()
+    for item in parsr.prices:
+        parser_dict[item['name']] = item
+    return parser_dict
+
