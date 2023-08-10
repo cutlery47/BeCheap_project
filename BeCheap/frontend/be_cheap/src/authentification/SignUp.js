@@ -33,6 +33,7 @@ function SignUp(props) {
         } else {
           const span = document.getElementById("error_msg")
           //вывожу ошибки в консоль (если были)
+          console.log(data)
           if (data.username != undefined) {
             span.textContent=("Login: " + data.username[0])
           } else if (data.password != undefined) {
@@ -58,8 +59,14 @@ function SignUp(props) {
           })
           .then((response) => response.json())
           .then((data) => {
-            props.setUserToken(data);
-            props.setUserName(formsData[0])
+            //при логине обновляем state юзера
+            const obj = Object();
+            Object.assign(obj, props.User)
+
+            obj.token = data;
+            obj.name = formsData[0];
+            
+            props.setUser(obj);
 
             document.getElementById("close").click()
           })
@@ -73,7 +80,7 @@ function SignUp(props) {
   return (
     <div className="sign_up">
       <div className="sign_up_inner">
-        <button className="close_button" id="close" onClick={() => props.setAuthClicked(false)}> 
+        <button className="button_sign" id="close" onClick={() => props.setAuthClicked(false)}> 
           Close
         </button>
         <span id='title'>
@@ -84,29 +91,28 @@ function SignUp(props) {
             <span>
             Choose your login:
             </span>
-            <input id="inpt_1" className='input'/>
+            <input id="inpt_1" className='input_auth' maxLength={15}/>
           </div>
           <div className='field' id="passwrd_field">
             <span>
             Choose your password:
             </span>
-            <input id="inpt_2" className='input'/>
+            <input id="inpt_2" className='input_auth'  type='password' maxLength={15}/>
           </div>
           <div className='field' id="passwrd_field_2">
             <span> 
               Confirm your password:
             </span>
-            <input id="inpt_3" className='input'/>
+            <input id="inpt_3" className='input_auth' type='password'  maxLength={15}/>
           </div>
           <span className = "login_link" onClick={() => props.setLoginState(true)}>
-            
             I already have an account!
           </span>
 
         </div>
-          <button  className='submit_button' onClick={() => {
+          <button  className='button_sign' id='submit' onClick={() => {
 
-            const data = document.getElementsByClassName('input')
+            const data = document.getElementsByClassName('input_auth')
             const data_arr = []
 
             for (let dat of data) {
@@ -120,9 +126,7 @@ function SignUp(props) {
             }}>
               Sign Up!
           </button>
-          <span id="error_msg">
-            
-          </span>
+          <span id="error_msg"/>
       </div>
     </div>
   )

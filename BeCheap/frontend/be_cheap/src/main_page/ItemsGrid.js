@@ -26,6 +26,7 @@ function ItemsGrid(props) {
       proper_objects.push(info) 
     }
 
+    console.log(proper_objects)
     return proper_objects;
   }
 

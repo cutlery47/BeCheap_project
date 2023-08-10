@@ -1,12 +1,15 @@
 .clothing {
-    display: block;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .item {
     display: inline-block;
     width: 200px;
-    margin-block: 20px;
-    margin-left: 12px;
+    min-height: 350px;
+    margin-top: 10px;
+    margin-left: 13px;
+    border-radius: 2px;
 }
 
 .item .item_image{
@@ -17,14 +20,34 @@
 }
 
 .item .item_image img {
+    background-color: gray;
     display: block;
     height: 200px;
     width: 200px;
 
 }
 
-.item .item_descript span {
-    height: 50px;
+.item .item_stuff {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.item .item_descript #name {
+    /* height: 50px; */
+    display: block;
+    padding-top: 5px;
+}
+
+.item .item_descript #category {
+    padding-top: 5px;
+    height: 20px;
+    display: block;
+}
+
+.item .item_descript #prices {
+    padding-top: 5px;
+    height: 20px;
     display: block;
 }
 

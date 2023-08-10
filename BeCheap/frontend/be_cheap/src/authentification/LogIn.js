@@ -25,9 +25,15 @@ function LogIn(props) {
       .then((data) => {
         if (login_status == true) {
           console.log("logged in successfully!");
-          //при логине обновляем state переменные
-          props.setUserToken(data)
-          props.setUserName(formsData[0])
+
+          //при логине обновляем state юзера
+          const obj = Object();
+          Object.assign(obj, props.User)
+          
+          obj.token = data;
+          obj.name = formsData[0];
+
+          props.setUser(obj);
 
           document.getElementById("close").click()
         } else {
@@ -50,7 +56,7 @@ function LogIn(props) {
   return (
     <div className="log_in">
       <div className="log_in_inner">
-        <button className="close_button" id="close" onClick={() => {
+        <button className="button_log" id="close" onClick={() => {
           props.setAuthClicked(false);
           props.setLoginState(false);}}> 
           Close
@@ -63,21 +69,21 @@ function LogIn(props) {
             <span>
             Your login:
             </span>
-            <input className='input'/>
+            <input className='input_auth' maxLength={15}/>
           </div>
           <div className='field' id="passwrd_field">
             <span>
             Your password:
             </span>
-            <input className='input'/>
+            <input className='input_auth' type='password' maxLength={15}/>
           </div>
           <span className = "login_link" onClick={() => props.setLoginState(false)}>
             I dont have an account yet!
           </span>
 
         </div>
-          <button  className='submit_button' onClick={() => {
-            const data = document.getElementsByClassName('input')
+          <button  className='button_log' id='submit_log' onClick={() => {
+            const data = document.getElementsByClassName('input_auth')
             const data_arr = []
 
             for (let dat of data) {
@@ -88,10 +94,7 @@ function LogIn(props) {
             }}>
               Log in!
           </button>
-          <span id="error_msg">
-
-          </span>
-        
+          <span id="error_msg"/>        
       </div>
     </div>
   )

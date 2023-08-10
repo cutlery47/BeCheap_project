@@ -76,6 +76,8 @@ class Parser:
             clothing = dict()
             clothing['id'] = count
 
+            clothing['link'] = 'https://www.endclothing.com' + item['href']
+
             pointer = item.find('div')
             pointer = pointer.find_next_sibling('span')
 
@@ -89,17 +91,18 @@ class Parser:
             # чтобы парсер не падал - скипаем нахуй
             try:
                 pointer = pointer.find_next_sibling('div')
-                clothing['prev_price'] = pointer.text.split('RUB')[1]
-                clothing['new_price'] = pointer.text.split('RUB')[2]
+                clothing['prev_price'] = pointer.find_next('span').text
+                clothing['new_price'] = pointer.find_next('span').text
                 pointer = pointer.find_next_sibling('span')
                 clothing['sale'] = pointer.text
             except (IndexError, AttributeError) as error:
-                continue
+                pass
 
             clothing['img'] = item.find('div').find('img')['src']
-
             # СЮДААА
             self.prices.append(clothing)
+
+
 
     # https://rivegauche.ru/category/parfyumeriya-3/muzhskie-aromaty-4?q=:popularity:stockLevelStatus:lowStock:stockLevelStatus:inStock:categoryShowcases:showcases_offer&currentPage=11&categoryCode=Perfumery_Men
     # не работает ----- переделать нахуй
@@ -129,4 +132,5 @@ class Parser:
 def get_parse_data():
     parsr = Parser('https://www.endclothing.com/ru/sale?page=1')
     parsr.getPrices_End()
+    print(parsr.prices)
     return parsr.prices

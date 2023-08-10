@@ -7,19 +7,16 @@ function Pannel(props) {
     <>
         <div className="upper_pannel">
             <div className="labels">
-                    <div>
-                        BeCheap
-                    </div>   
+                <div>
+                    BeCheap
+                </div>   
             </div>  
             {/* будем изменять значение is_sorted при нажатии на кнопку */}
             <div className="buttons">
-                <button className="button" role="button" onClick={() => props.setClothesSortClicked(!props.is_sorted)}>
-                    Sort
-                </button>
                 <button className="button" id="auth_btn" onClick={() => 
                     {
                     //просто оставлю на всякий лог токена
-                    console.log(props.userToken)
+                    console.log(props.User.token)
                     props.setAuthClicked(!props.authorize)
                     }}>
                     <span id="sign_btn_txt">
@@ -27,10 +24,14 @@ function Pannel(props) {
                     </span>
                 </button>
                 <button class="button" id="profile_btn" onClick={() => 
-                    {
-                        props.setAuthClicked(!props.authorize)
+                    {   
+                        if (props.User.token == 'None') {
+                            props.setAuthClicked(!props.authorize)
+                        } else {
+                            props.setProfileClicked(!props.profile_clicked)
+                        }
+                        
                     }}>
-
                     <span id="usrname_txt">
                         Profile
                     </span>
