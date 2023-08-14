@@ -18,7 +18,7 @@ class AddToFavorite(CreateFavorite, APIView):
     def post(self, request, item_id):
         if cache.get(f'{request.user.id}_favorites'):
             cache.delete(f'{request.user.id}_favorites')
-        query = self.add_to_favorites(request, Items, 'favorites', pk=item_id)
+        query = self.add_to_favorites(request, Items, ' favorites', pk=item_id)
         if query:
             return Response({"message": "Добавлено в избранное"})
         return Response({"message": "Удалено из избранного"})

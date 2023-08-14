@@ -11,8 +11,8 @@ from . import views
 
 urlpatterns = [
     path('items/category/<slug:slug>', views.GetListByCategory.as_view({'get': 'list'})),
-    path('items/', views.GetItemsView.as_view({'get': 'get_all_items'})),
-    path('items/<slug:slug>', views.GetItemsView.as_view({'get': 'get_one_item'}))
+    path('items/<int:page_number>', views.GetItemsView.as_view({'get': 'get_items'})),
+    path('items/<slug:slug>', views.GetItem.as_view({'get': 'get_one_item'}))
 ]
 
 # urlpatterns += router.urls

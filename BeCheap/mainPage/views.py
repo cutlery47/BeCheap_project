@@ -6,10 +6,10 @@ from django.views.decorators.cache import cache_page
 from rest_framework import permissions, generics, viewsets
 from rest_framework.authtoken.admin import User
 from rest_framework.decorators import action
+from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 
-
-from .mixins import SlugMixin
+from .mixins import SlugMixin, Pagination_class
 from .models import Items, Categories
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -30,18 +30,23 @@ from .serializer import ItemsSerializer, CategorySerializer
 #     #     Favorite.objects.get_or_create
 
 
+class GetItemsView(viewsets.ViewSet, Pagination_class):
+    query = Items
+    pagination_size = 10
 
-class GetItemsView(viewsets.ViewSet):
-    def get_all_items(self, request):
-        items_cache = cache.get(settings.ITEMS_CACHE_NAME)
-        if items_cache:
-            items = items_cache
-            return Response(items)
+    def get_items(self, request, page_number):
+        if page_number < 0:
+            raise ValidationError("page must be non negative number")
+        page = self.get_page(page_number, ItemsSerializer, cache_name=settings.ITEMS_CACHE_NAME,
+                             select_related='item_category', prefetch_related='favorites')
+        if page:
+            return Response(page)
         else:
-            items = Items.objects.all().select_related('item_category')
-            serializer = ItemsSerializer(items, many=True)
-            cache.set(settings.ITEMS_CACHE_NAME, serializer.data, settings.CACHE_TTL)
-        return Response(serializer.data)
+            return Response({'{"message": "Морис я бильше не можу гоп гоп чи да гоп"}'})
+
+
+class GetItem(viewsets.ViewSet):
+
     def get_one_item(self, request, slug):
         item = cache.get(slug)
         if item:
@@ -52,6 +57,7 @@ class GetItemsView(viewsets.ViewSet):
             serializer = ItemsSerializer(item)
             cache.set(slug, serializer.data, 60)
         return Response(serializer.data)
+
 
 class GetListByCategory(viewsets.ViewSet):
     def list(self, request, slug):

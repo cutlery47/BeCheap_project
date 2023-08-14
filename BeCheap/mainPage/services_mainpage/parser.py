@@ -127,10 +127,12 @@ class Parser:
 
 
 def get_parse_data():
-    parsr = Parser('https://www.endclothing.com/ru/sale?page=1')
+    parsr = Parser('https://www.endclothing.com/gb/sale?    page=1')
     parsr.getPrices_End()
     parser_dict = dict()
     for item in parsr.prices:
         parser_dict[item['name']] = item
-    return parser_dict
+    print(parser_dict)
+
+
 

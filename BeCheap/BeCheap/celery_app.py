@@ -19,7 +19,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'parse_every_10_minutes': {
         'task': 'BeCheap.tasks.parser',
-        'schedule': crontab(minute='*/10'),
+        'schedule': crontab(minute='*/1'),
     }
 }
 

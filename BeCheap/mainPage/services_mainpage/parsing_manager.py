@@ -31,11 +31,15 @@ from mainPage.services_mainpage.parser import get_parse_data
 
 class CompareParseWithModel:
     def __init__(self, data):
+        if not data:
+            raise ValueError("Пиздец")
         self.data = data
         self.new_categories_list = []
         self.updated_items = []
 
     def compare_and_fill(self):
+
+
         query = Items.objects.all().values('item_name', 'id')
         for item_name_id in query:
             """Проверяем есть ли предмет из базы данных в новых данных из парсера"""
@@ -65,7 +69,6 @@ class CompareParseWithModel:
         for new_item in self.data:
             """Добавляем новые предметы из парсера"""
             if self.data[new_item]:
-
                 item = self.data[new_item]
                 if item['type'] not in self.new_categories_list:
                     self.new_categories_list.append(item['type'])
@@ -98,7 +101,7 @@ class ParsingFunctional(CompareParseWithModel):
                     for user in category.subscriptions.all():
                         self.emails_for_categories.append((user.username, user.email, category))
                 except Categories.DoesNotExist:
-                    "Создает новую категорию сам, просто чтобы наполнить базу данных"
+                    "Создает новую категорию, просто чтобы наполнить базу данных"
                     Categories.objects.create(category_name=category)
 
             return self.emails_for_categories
@@ -111,3 +114,5 @@ class ParsingFunctional(CompareParseWithModel):
                     self.emails_for_items.append((user.username, user.email, message, item.item_name))
             return self.emails_for_items
         return None
+
+
