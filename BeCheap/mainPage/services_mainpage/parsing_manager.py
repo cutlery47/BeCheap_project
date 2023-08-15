@@ -1,5 +1,6 @@
 import os
 
+import typing
 from django.core.cache import cache
 from django.utils.text import slugify
 
@@ -30,7 +31,7 @@ from mainPage.services_mainpage.parser import get_parse_data
 
 
 class CompareParseWithModel:
-    def __init__(self, data):
+    def __init__(self, data: typing.Dict[str, typing.Dict[str, str]]) -> None:
         if not data:
             raise ValueError("Пиздец")
         self.data = data
@@ -38,8 +39,6 @@ class CompareParseWithModel:
         self.updated_items = []
 
     def compare_and_fill(self):
-
-
         query = Items.objects.all().values('item_name', 'id')
         for item_name_id in query:
             """Проверяем есть ли предмет из базы данных в новых данных из парсера"""
@@ -84,7 +83,7 @@ class CompareParseWithModel:
 
 
 class ParsingFunctional(CompareParseWithModel):
-    def __init__(self, data):
+    def __init__(self, data: typing.Dict[str, typing.Dict[str, str]]) -> None:
         super().__init__(data)
         self.emails_for_categories = []
         self.emails_for_items = []

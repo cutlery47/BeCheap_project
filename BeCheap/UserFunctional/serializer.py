@@ -9,9 +9,11 @@ from mainPage.models import Favorite
 class FavoritesSerializer(serializers.ModelSerializer):
     item = serializers.SlugRelatedField(slug_field='slug', queryset=Items.objects)
     user = serializers.SlugRelatedField(slug_field='username', queryset=User.objects)
+
     class Meta:
         model = Favorite
         fields = ["item", "user"]
+
     def create(self, validated_data):
         new_obj, created = Favorite.objects.get_or_create(
             item=validated_data.get("item"),
@@ -22,8 +24,3 @@ class FavoritesSerializer(serializers.ModelSerializer):
             return False
         else:
             return created
-
-
-
-
-

@@ -16,10 +16,15 @@ app.autodiscover_tasks()
 
 
 
-app.conf.beat_schedule = {
-    'parse_every_10_minutes': {
-        'task': 'BeCheap.tasks.parser',
-        'schedule': crontab(minute='*/1'),
-    }
-}
+# app.conf.beat_schedule = {
+#     'parse_every_10_minutes': {
+#         'task': 'BeCheap.tasks.parser',
+#         'schedule': crontab(minute='*/1'),
+#     }
+# }
+#
+
+@app.task()
+def parser2():
+    print('b')
 

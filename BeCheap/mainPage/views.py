@@ -9,7 +9,7 @@ from rest_framework.decorators import action
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 
-from .mixins import SlugMixin, Pagination_class
+from .mixins import SlugMixin, PaginationClass
 from .models import Items, Categories
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -30,7 +30,7 @@ from .serializer import ItemsSerializer, CategorySerializer
 #     #     Favorite.objects.get_or_create
 
 
-class GetItemsView(viewsets.ViewSet, Pagination_class):
+class GetItemsView(viewsets.ViewSet, PaginationClass):
     query = Items
     pagination_size = 10
 

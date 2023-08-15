@@ -191,8 +191,10 @@ DJOSER = {
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        'rest_framework.authentication.TokenAuthentication'
-    )
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 1,
 }
 
 LOGGING = {
@@ -214,6 +216,9 @@ LOGGING = {
 CACHE_TTL = 60 * 15
 ITEMS_CACHE_NAME = 'items'
 CATEGORY_CACHE_NAME = 'categories'
+FAVORITES_CACHE_NAME = 'favorites'
+
+
 CELERY_BROKER_URL = 'redis://127.0.0.1:6379/1'
 CELERY_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
 CELERY_RESULT_BACKEND = 'redis://127.0.0.1:6379/1'
@@ -222,6 +227,17 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 CELERY_BROKER_CONNECTION_RETRY = True
+
+CACHE2_TTL = 60 * 15
+CELERY2_BROKER_URL = 'redis://127.0.0.1:6379/2'
+CELERY2_BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 3600}
+CELERY2_RESULT_BACKEND = 'redis://127.0.0.1:6379/1'
+CELERY2_ACCEPT_CONTENT = {'application/json'}
+CELERY2_TASK_SERIALIZER = 'json'
+CELERY2_RESULT_SERIALIZER = 'json'
+CELERY2_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+CELERY2_BROKER_CONNECTION_RETRY = True
+
 
 
 CACHES = {
