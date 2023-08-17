@@ -2,7 +2,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import permissions, generics, viewsets
 from rest_framework.authtoken.admin import User
 from rest_framework.decorators import action
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 
 from .mixins import SlugMixin, CreateFavorite
@@ -10,27 +10,22 @@ from .models import Items, Categories
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from .serializer import ItemsSerializer, CategorySerializer
+from .mixins import Pagination_class
+class GetItemsView(viewsets.ViewSet, Pagination_class):
+    query = Items
 
+    def get_items(self, request, page_number):
+        page = self.get_page(page_number, ItemsSerializer)
+        if page:
+            return Response(page)
+        else:
+            return Response({'{"message": "Морис я бильше не можу гоп гоп чи да гоп"}'})
 
-
-
-
-
-
-
-
-class GetItemsView(SlugMixin, viewsets.ModelViewSet):
-    queryset = Items.objects.all()
-    serializer_class = ItemsSerializer
-    @action(methods=['get'], detail=False)
-    def category(self, request):
-        query = Categories.objects.all()
-        # serializer = ItemsSerializer(queryset, many=True)
-        return Response({"categories": [i.category_name for i in query]})
-    # @action(detail=True, methods=['post'], permission_classes=[IsAuthenticated,])
-    # def AddToFavorite(self, request, slug):
-    #     instance = self.get_object()
-    #     Favorite.objects.get_or_create
+class GetItem(viewsets.ViewSet):
+    def get_one_item(self, request, slug):
+        item = Items.objects.get(slug=slug)
+        serializer = ItemsSerializer(item)
+        return Response(serializer.data)
 
 
 class GetListByCategory(viewsets.ViewSet):
@@ -41,7 +36,7 @@ class GetListByCategory(viewsets.ViewSet):
 
 
 class AddToFavorite(CreateFavorite, APIView):
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    # permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     def post(self, request, item_id):
         query = self.add_to_favorites(request, Items, 'favorites', pk=item_id)
         if query:
@@ -55,9 +50,6 @@ class AddToSubscription(CreateFavorite, APIView):
         if query:
             return Response({"message": "Добавлено в избранное"})
         return Response({"message": "Удалено из избранного"})
-
-
-
 
 class GiveUserFavorites(APIView):
     permission_classes = (permissions.IsAuthenticated,)
