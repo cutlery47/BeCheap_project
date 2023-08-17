@@ -13,6 +13,13 @@ function SignUp(props) {
 
     //бля какую же хуету я написал это просто пизец
     if (formsData.length !== 0) {
+      const span = document.getElementById("error_msg")
+
+      if (formsData[1] != formsData[2]) {
+        span.textContent=("Password: passwords should be the same");
+        return;
+      }
+
       fetch('http://127.0.0.1:8000/auth/users/', {
       method: 'POST',
       body: JSON.stringify({
@@ -31,7 +38,6 @@ function SignUp(props) {
         if (signup_status == true) {
           console.log("signed up successfully!");
         } else {
-          const span = document.getElementById("error_msg")
           //вывожу ошибки в консоль (если были)
           console.log(data)
           if (data.username != undefined) {
@@ -63,7 +69,7 @@ function SignUp(props) {
             const obj = Object();
             Object.assign(obj, props.User)
 
-            obj.token = data;
+            obj.token = data.auth_token;
             obj.name = formsData[0];
             
             props.setUser(obj);
@@ -119,9 +125,7 @@ function SignUp(props) {
               data_arr.push(dat.value)
             }
             
-            if (data_arr[1] == data_arr[2]) {
-              setFormsData(data_arr);
-            }
+            setFormsData(data_arr);
 
             }}>
               Sign Up!

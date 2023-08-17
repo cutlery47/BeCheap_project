@@ -7,9 +7,6 @@ function AuthPopup(props) {
   //с помощью этого проверям - логиниться или регаться
   let [doLogin, setLoginState] = useState(false);
   let [forms, setForms] = useState(<></>)
-
-  //catch response - для обработки ошибок сети (4XX И 5XX)
-  //catch data - для обработки ошибок в самих данных
   
   //рендерим логинг или регинг в зависимости от выбора юзера
   useEffect(() => {
@@ -17,12 +14,12 @@ function AuthPopup(props) {
       setForms(<SignUp 
         setAuthClicked={props.setAuthClicked} setLoginState={setLoginState}
         User={props.User} setUser={props.setUser}
-      />);
+        />);
     } else {
       setForms(<LogIn 
         setAuthClicked={props.setAuthClicked} setLoginState={setLoginState}
         User={props.User} setUser={props.setUser}
-      />);
+        />);
     }
   }, [doLogin])
   

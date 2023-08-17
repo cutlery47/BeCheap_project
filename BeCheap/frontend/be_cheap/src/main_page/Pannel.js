@@ -15,9 +15,7 @@ function Pannel(props) {
             <div className="buttons">
                 <button className="button" id="auth_btn" onClick={() => 
                     {
-                    //просто оставлю на всякий лог токена
-                    console.log(props.User.token)
-                    props.setAuthClicked(!props.authorize)
+                    props.setAuthClicked(true)
                     }}>
                     <span id="sign_btn_txt">
                         Sign Up / Log in
@@ -26,9 +24,9 @@ function Pannel(props) {
                 <button class="button" id="profile_btn" onClick={() => 
                     {   
                         if (props.User.token == 'None') {
-                            props.setAuthClicked(!props.authorize)
+                            props.setAuthClicked(true)
                         } else {
-                            props.setProfileClicked(!props.profile_clicked)
+                            props.setProfileClicked(true)
                         }
                         
                     }}>

@@ -1,0 +1,20 @@
+.fav_clothes {
+    display: flex;
+}
+
+.items_scroll img{
+    width: 25px;
+    cursor: pointer;
+}
+
+.items_scroll #img_1 {
+    position: absolute;
+    left: 6px;
+    top: 46%;
+}
+
+.items_scroll #img_2 {
+    position: absolute;
+    right: 6px;
+    top: 46%;
+}

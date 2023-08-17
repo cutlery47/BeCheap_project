@@ -1,0 +1,17 @@
+.pr_item img{
+    width: 122.5px;
+    border-radius: 15px;
+}
+
+.pr_item {
+    display: block;
+    width: 122.5px;
+    padding-top: 10px;
+    padding-left: 6%;
+    padding-right: 6%;
+    
+}
+
+.pr_item_txt {
+    font-size: 15px;
+}

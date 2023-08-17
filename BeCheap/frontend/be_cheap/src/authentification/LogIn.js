@@ -30,11 +30,10 @@ function LogIn(props) {
           const obj = Object();
           Object.assign(obj, props.User)
           
-          obj.token = data;
+          obj.token = data.auth_token;
           obj.name = formsData[0];
 
           props.setUser(obj);
-
           document.getElementById("close").click()
         } else {
           const span = document.getElementById("error_msg")

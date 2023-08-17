@@ -1,12 +1,13 @@
 .clothing {
+    background-color: rgb(228, 228, 228);
     display: flex;
     flex-wrap: wrap;
 }
 
 .item {
     display: inline-block;
-    width: 200px;
-    min-height: 350px;
+    width: 285px;
+    min-height: 440px;
     margin-top: 10px;
     margin-left: 13px;
     border-radius: 2px;
@@ -14,16 +15,17 @@
 
 .item .item_image{
     display: block;
-    height: 200px;
-    width: 200px;
+    height: 285px;
+    width: 285px;
 
 }
 
 .item .item_image img {
     background-color: gray;
+    border-radius: 10px;
     display: block;
-    height: 200px;
-    width: 200px;
+    height: 285px;
+    width: 285px;
 
 }
 
@@ -51,7 +53,42 @@
     display: block;
 }
 
-.item .item_descript span button {
-    display: block;
+.page_conts {
+    position: relative;
+    align-content: center;
+    height: 40px;
+    width: 100%;;
 }
+
+.page_conts span {
+    font-size: 30px;
+    top: 6px;
+    left: 47.5%;
+    position: absolute;
+}
+
+
+.page_btns img{
+    width: 30px;
+    cursor: pointer;
+}
+
+.page_btns .page_btn {
+    top: 10px;
+    position: absolute;
+}
+
+.page_btns #btnL {
+    left: 45%
+}
+
+.page_btns #btnR {
+    right: 45%
+}
+
+
+
+
+
+
 
