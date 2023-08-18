@@ -5,18 +5,24 @@ import arrowImgL from '../media/arrow_left.png'
 import arrowImgR from '../media/arrow_right.png'
 
 function ProfileFavorites(props) {
+  //массив с избранными товарами для юзера
   let [favorites, setFavorites] = useState([]);
+  //html-блок с одеждой
   let [clothes, setClothes] = useState(<></>)
+  //страница компонента
   let [favsPage, setFavsPage] = useState(1)
 
+  //при открытии профиля - сразу фетч избранного
   useEffect(() => {
     fetchData();
   }, [props.profile_clicked])
 
+  //обновляем одежду после получения данных
   useEffect(() => {
     setClothes(render_items(favorites))
   }, [favorites, favsPage])
 
+  //запрос на избранное
   function fetchData() {
     if (props.User.name != 'None') {
       const url = 'http://127.0.0.1:8000/api/v1/' + props.User.name + '/favorites'
@@ -28,7 +34,6 @@ function ProfileFavorites(props) {
         }
       }).then((response) => {
         if (response.ok) {
-          console.log(response)
           return response.json()
         } else {
           console.log(response)
@@ -39,6 +44,7 @@ function ProfileFavorites(props) {
     }
   }
 
+  //преобразование непонятнй хуйни в понятную (Javascript moment num. 2)
   function hz_kak_nazvat_2(data) {
     const proper_objects = [];
 
@@ -51,6 +57,7 @@ function ProfileFavorites(props) {
     return proper_objects;
   }
 
+  //выведение одежды
   function render_items(proper_objects) {
     //для каждого объекта создаю html блок
     let rows = []
@@ -62,6 +69,7 @@ function ProfileFavorites(props) {
       for (let i = (favsPage - 1) * items_on_page; i < items_on_page * favsPage; i += 1) {
         if (proper_objects[i] != undefined) {
           rows.push(
+            //товар
             <ProfileItem
             index={i} obj={proper_objects[i]}
             />

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import '../styles/Pannel.css'
 import '../authentification/AuthPopup'
 
@@ -11,9 +11,9 @@ function Pannel(props) {
                     BeCheap
                 </div>   
             </div>  
-            {/* будем изменять значение is_sorted при нажатии на кнопку */}
             <div className="buttons">
                 <button className="button" id="auth_btn" onClick={() => 
+                    // поле логина
                     {
                     props.setAuthClicked(true)
                     }}>
@@ -21,7 +21,9 @@ function Pannel(props) {
                         Sign Up / Log in
                     </span>
                 </button>
-                <button class="button" id="profile_btn" onClick={() => 
+                <button className="button" id="profile_btn" onClick={() => 
+                    // если зареган - поле профиля
+                    // иначе - поле регистрации
                     {   
                         if (props.User.token == 'None') {
                             props.setAuthClicked(true)

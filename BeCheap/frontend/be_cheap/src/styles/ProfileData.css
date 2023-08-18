@@ -14,11 +14,11 @@
 .profile_data_inner {
     border-radius: 15px;
     border: 3px solid #000;
-    
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     position: relative;
     display: flex;
     padding: 300px 300px 300px 300px;
-    max-width: 640p;
+    max-width: 640px;
     background-color: #FFF;
 }
 
@@ -33,11 +33,11 @@
     box-sizing: border-box;
     color: #fff;
     cursor: pointer;
-    font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
+    font-family: Arial,sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 0px;
-  
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     overflow: visible;
     padding: auto;
     text-align: center;
@@ -97,11 +97,11 @@ transform: translate(2px, 2px);
     color: rgb(260, 260, 260);
     border-radius: 5px;
     position: absolute;
-    width: 20%;
+    width: 25%;
     min-height: 50%;
     text-align: center;
-    padding-left: 40%;
-    padding-right: 40%;
+    padding-left: 37.5%;
+    padding-right: 37.5%;
     padding-top: 3.5%;
     padding-bottom: 3.5%;
     left: 0;
@@ -125,6 +125,7 @@ transform: translate(2px, 2px);
 }
 
 .forms .title_1 {
+    position: relative;
     margin-top: 2px; 
     margin-bottom: 0;   
 }

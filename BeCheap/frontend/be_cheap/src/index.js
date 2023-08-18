@@ -10,7 +10,6 @@ import App from "./main_page/InterfaceMain"
 //https://blog.logrocket.com/virtual-dom-react
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
+  //тут стоял strict mode но нахуй надо я считаю...
     <App/>
-  </React.StrictMode>
 );

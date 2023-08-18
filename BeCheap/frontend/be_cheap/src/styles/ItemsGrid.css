@@ -6,6 +6,7 @@
 
 .item {
     display: inline-block;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     width: 285px;
     min-height: 440px;
     margin-top: 10px;
@@ -61,29 +62,29 @@
 }
 
 .page_conts span {
-    font-size: 30px;
-    top: 6px;
-    left: 47.5%;
+    font-size: 26px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    top: -2.75px;
+    left: 47.1%;
     position: absolute;
 }
 
 
 .page_btns img{
-    width: 30px;
+    width: 28px;
     cursor: pointer;
 }
 
 .page_btns .page_btn {
-    top: 10px;
     position: absolute;
 }
 
 .page_btns #btnL {
-    left: 45%
+    left: 48%
 }
 
 .page_btns #btnR {
-    right: 45%
+    right: 48%
 }
 
 

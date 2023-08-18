@@ -12,6 +12,7 @@
 }
 
 .sign_up_inner {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border-radius: 15px;
     border: 3px solid #000;
     
@@ -64,7 +65,7 @@
 
 .login_link {
     position: absolute;
-    left: 31%;
+    left: 28.5%;
     bottom: 50px;
     color: black;
     text-decoration: underline;
@@ -73,8 +74,8 @@
 
 #title {
     font-size: 30px ;
-    top: 50px;
-    left: 24%;
+    top: 60px;
+    left: 21%;
     position: absolute;
 }
 
@@ -90,7 +91,7 @@
     box-sizing: border-box;
     color: #fff;
     cursor: pointer;
-    font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 0px;
@@ -130,7 +131,7 @@
     }
   }
 
-  #close {
+  .sign_up_inner #close {
     position: absolute;
     padding-right: 5px;
     padding-left: 5px;

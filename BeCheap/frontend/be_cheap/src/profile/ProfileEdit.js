@@ -2,13 +2,6 @@ import React, { useEffect, useState } from 'react'
 import '../styles/ProfileEdit.css'
 
 function ProfileEdit(props) {
-    let [confirmEdit, setConfirmed] = useState(false);
-
-    useEffect(() => {
-        console.log('XYU');
-
-    }, [confirmEdit])
-
     return (
         <div className='profile_edit'>
             <div className='profile_edit_inner'>
@@ -43,9 +36,7 @@ function ProfileEdit(props) {
                         Close
                     </button>
 
-                    <button id='edit_apply' onClick={() => {
-                        setConfirmed(true);
-                    }}>
+                    <button id='edit_apply'>
                         Confirm changes
                     </button>
                 </div>

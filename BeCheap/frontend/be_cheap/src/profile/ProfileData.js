@@ -12,6 +12,7 @@ function ProfileData(props) {
                 <img src={user_img} id='user_img' alt='img'/>
                 <h1 className='title_1'>{props.User.name}</h1>
                 <button className='btn_profile' id='edit_profile' onClick={() => {
+                    //поле редактирования
                     props.setEdit(true)
                     }}>
                     Edit Profile
@@ -22,6 +23,7 @@ function ProfileData(props) {
                     Your favorite items:
                 </h2>
                 <div className='profile_favorites'>
+                    {/* компонент с избранным */}
                     <ProfileFavorites
                     User={props.User} setUser={props.setUser}
                     profile_clicked={props.profile_clicked} setProfileClicked={props.setProfileClicked}/>
@@ -29,6 +31,7 @@ function ProfileData(props) {
             </div>
             <div className='profile_btns'>
                 <button className='btn_profile' id='close_profile' onClick={() => {
+                    // выход
                     props.setProfileClicked(false);
                 }}>
                     Close

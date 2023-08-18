@@ -12,9 +12,9 @@
 }
 
 .log_in_inner {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     border-radius: 15px;
     border: 3px solid #000;
-    
     position: relative;
     padding: 300px 200px 300px 200px;
     max-width: 640px;
@@ -29,8 +29,8 @@
 
 #title_log {
     font-size: 30px ;
-    top: 50px;
-    left: 18%;
+    top: 60px;
+    left: 15%;
     position: absolute;
 }
 
@@ -55,7 +55,7 @@
     box-sizing: border-box;
     color: #fff;
     cursor: pointer;
-    font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-size: 14px;
     font-weight: 400;
     line-height: 0px;
@@ -68,6 +68,19 @@
     -webkit-user-select: none;
     vertical-align: middle;
     white-space: nowrap;
+  }
+
+  .log_in_inner #close {
+    position: absolute;
+    padding-right: 22.5px;
+    padding-left: 22.5px;
+    top: 5px;
+    right: 10px;
+  }
+
+  .log_in_inner .login_link {
+    position: absolute;
+    left: 110px
   }
   
   .button_log:focus {

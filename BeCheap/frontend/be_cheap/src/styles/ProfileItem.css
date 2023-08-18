@@ -9,9 +9,13 @@
     padding-top: 10px;
     padding-left: 6%;
     padding-right: 6%;
-    
 }
 
 .pr_item_txt {
-    font-size: 15px;
+    font-size: 13px;
+    color: black;
+}
+
+.pr_item_stuff {
+    text-decoration: none;
 }

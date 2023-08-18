@@ -2,47 +2,18 @@ import React, {useState, useEffect}from 'react'
 import '../styles/Item.css'
 
 function Item(props) {
+    //состояния кнопки 
     const conditions = ['Add to favorites', 'In favorites!']
+    
     //из-за того, что элементы в бд нужно транкейтнуть
     const id_diff = 77 
 
+    //кнопка
     let [favs_btn, setFavsClicked] = useState(false);
+    //состояние кнопки
     let [condition, setFavs] = useState(conditions[0]);
-    let [loaded, setLoaded] = useState(false);
 
-    useEffect(() => {
-        setLoaded(false);
-        
-        if (props.User.favorites.has(String(props.index + id_diff))) {
-            setFavs(conditions[1]);
-            setFavsClicked(true);
-        } else {
-            setFavs(conditions[0]);
-            setFavsClicked(false);
-        }
-    }, [props.currentPage])
-
-    function editCSS() {
-        if (loaded == false) {
-            const btn = document.getElementById('btn_' + String(props.index + id_diff))
-            
-            if (btn == null) {
-                return
-            }
-
-            if (favs_btn === true) {
-                // console.log('in truers: ' + String(props.index))
-                document.getElementById('btn_' + String(props.index + id_diff)).style.cssText = "background-color: white; color: black;"
-                setLoaded(true);
-            } else if (favs_btn === false) {
-                // console.log('in falsers: ' + String(props.index))
-                document.getElementById('btn_' + String(props.index + id_diff)).style.cssText = "background-color: black; color: white;"
-                setLoaded(true);
-            }
-        }
-    
-    }
-
+    //добавление в избранное по нажатию кнопки
     function addToFavorites(id, token) {
         fetch('http://127.0.0.1:8000/api/v1/items/add/' + id, {
         method: 'POST',
@@ -52,42 +23,31 @@ function Item(props) {
         }
         }).then((response) => {
             if (response.ok) {
-                setFavsClicked(!favs_btn);
-
-                if (condition == conditions[0]) {
-                    setFavs(conditions[1]);
-                } else {
-                    setFavs(conditions[0]);
-                }
-
-                const obj = Object();
-                Object.assign(obj, props.User)
+                console.log('fav items added or removed!')
+                setFavsClicked(!favs_btn);  
                 
-
-                if (favs_btn == false) {
-                    if (obj.favorites.has("None")) {
-                        obj.favorites.delete("None")
-                    }
-                    obj.favorites.add(String(id));
-
-                    document.getElementById('btn_' + id).style.cssText = "background-color: white; color: black;"
-
+                if (condition == conditions[0]) {
+                    setFavs(conditions[1])
                 } else {
-                    obj.favorites.delete(String(id));
-                    if (obj.favorites.size == 0) {
-                        obj.favorites.add("None");
-                    }
-
-                    document.getElementById('btn_' + id).style.cssText = "background-color: black; color: white;"
-                   
+                    setFavs(conditions[0])
                 }
-
-                props.setUser(obj)
+                   
             } else {
-                console.log("error");
+                console.log("error when adding or removing favorites");
             }
         })
     }
+
+    //при перелистывании страницы смотрим,
+    //есть ли товары с новой страницы в избранном
+    //если есть - кнопку меняем
+    useEffect(() => {
+        if (props.favorites_data.includes(props.obj.item_name)) {
+            setFavs(conditions[1]);
+        } else {
+            setFavs(conditions[0]);
+        }
+    }, [props.item_data])
     
     return (
         <div className='item' id={(props.index) + id_diff}> 
@@ -110,13 +70,13 @@ function Item(props) {
             <button className='item_btn' id={"btn_" + (props.index + id_diff)} 
             onClick={() => {
                 if (props.User.token == 'None') {
+                    //переброс на поле логина
                     props.setAuthClicked(true)
                 } else {
+                    //если залогинен - збс
                     addToFavorites(props.index + id_diff, props.User.token);
                 }
             }}>
-                
-                {editCSS()}
                 {condition}
             </button>
         </div>

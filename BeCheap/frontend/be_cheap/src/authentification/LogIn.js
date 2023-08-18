@@ -2,11 +2,15 @@ import React, {useState, useEffect} from 'react'
 import '../styles/LogIn.css'
 
 function LogIn(props) {
+  //данные на ввод
   let [formsData, setFormsData] = useState([])
 
   useEffect(() => {
     let login_status = false
 
+    //запрос на логин
+    //если все норм - получаю токен
+    //иначе выдаю ошибку
     if (formsData.length !== 0) {
       fetch('http://127.0.0.1:8000/auth/token/login', {
         method: 'POST',

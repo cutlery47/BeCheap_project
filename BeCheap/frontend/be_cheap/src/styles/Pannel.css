@@ -1,4 +1,6 @@
 .upper_pannel {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
     display: block;
     height: 100px;
     background-color: gray;
@@ -22,6 +24,7 @@
 
 /* CSS */
 .button {
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   min-width: 20%;
   display: inline-block;
   position: relative; 
@@ -34,7 +37,6 @@
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
   font-size: 14px;
   font-weight: 400;
   line-height: 0px;
