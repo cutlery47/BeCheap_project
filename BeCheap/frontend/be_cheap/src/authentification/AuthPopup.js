@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react'
-import '../styles/AuthPopup.css'
 import LogIn from './LogIn'
 import SignUp from './SignUp';
 

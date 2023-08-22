@@ -1,81 +1,24 @@
 .upper_pannel {
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: bold;
-    display: block;
-    height: 100px;
-    background-color: gray;
+  display: flex;
+  justify-content: center;
+  background-color: rgb(150, 150, 150);
+  height: 50px
 }
 
-.upper_pannel .labels{
-    display: block;
-    height: 50px;
-    font-size: 44px; 
-    text-align: center;
-}
-
-.upper_pannel .buttons {
-    height: 50px;
-    display: flex;
-    background-color: rgb(160, 160, 160);
-    text-align: center;
-    justify-content: center;
-}
-
-
-/* CSS */
-.button {
+.pannel_label {
+  font-size: 40px;
+  font-weight: bold;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-  min-width: 20%;
-  display: inline-block;
-  position: relative; 
-  appearance: button;
-  background-color: #000;
-  background-image: none;
-  border: 1px solid #000;
-  border-radius: 4px;
-  box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  font-size: 14px;
-  font-weight: 400;
-  line-height: 0px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  margin-left: min(100px, 5%);
-  margin-right: min(100px, 5%);
-
-  overflow: visible;
-  padding: 12px 40px;
-  text-align: center;
-  text-transform: none;
-  touch-action: manipulation;
-  user-select: none;
-  -webkit-user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
 }
 
-.button:focus {
-  text-decoration: none;
+.lower_pannel {
+  display: flex;
+  justify-content: center;
+  background-color: rgb(180, 180, 180);
+  height: 45px;
 }
 
-.button:hover {
-  text-decoration: none;
+.pannel_spacing {
+  width: 300px;
 }
 
-.button:active {
-  box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
-  outline: 0;
-}
-
-.button:not([disabled]):active {
-  box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
-  transform: translate(2px, 2px);
-}
-
-@media (min-width: 768px) {
-  .button {
-    padding: 12px 50px;
-  }
-}

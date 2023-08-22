@@ -1,24 +1,25 @@
 import React, {useState, useEffect}from 'react'
-import '../styles/Item.css'
+import MyButton from '../templates/MyButton'
 
 function Item(props) {
     //состояния кнопки 
     const conditions = ['Add to favorites', 'In favorites!']
     
-    //из-за того, что элементы в бд нужно транкейтнуть
-    const id_diff = 77 
-
     //кнопка
     let [favs_btn, setFavsClicked] = useState(false);
     //состояние кнопки
     let [condition, setFavs] = useState(conditions[0]);
 
     //добавление в избранное по нажатию кнопки
-    function addToFavorites(id, token) {
-        fetch('http://127.0.0.1:8000/api/v1/items/add/' + id, {
+    function addToFavorites() {
+        if (props.User.token == 'None') {
+            props.setAuthClicked(true)
+        } 
+
+        fetch('http://127.0.0.1:8000/api/v1/items/add/' + props.obj.id, {
         method: 'POST',
         headers: {
-            "Authorization": "Token " + token,
+            "Authorization": "Token " + props.User.token,
             "Content-type": "application/json; charset=UTF-8",
         }
         }).then((response) => {
@@ -42,7 +43,7 @@ function Item(props) {
     //есть ли товары с новой страницы в избранном
     //если есть - кнопку меняем
     useEffect(() => {
-        if (props.favorites_data.includes(props.obj.item_name)) {
+        if (props.favorites_data.includes(props.obj.id)) {
             setFavs(conditions[1]);
         } else {
             setFavs(conditions[0]);
@@ -50,7 +51,7 @@ function Item(props) {
     }, [props.item_data])
     
     return (
-        <div className='item' id={(props.index) + id_diff}> 
+        <div className='item' id={props.obj.id}> 
             <a className='item_stuff' href={props.obj.item_link}>
                 <div className = "item_image">
                     <img src={props.obj.item_image}/>
@@ -63,24 +64,18 @@ function Item(props) {
                         <b>Category:</b> {props.obj.item_category}
                     </span>
                     <span className='item_txt' id='prices'>
-                        <b>Price:</b> {props.obj.item_cur_price} <strike> {props.obj.item_prev_price} </strike>
+                        <b>Price:</b> {props.obj.item_cur_price} <strike> {props.obj.item_prev_price} </strike> 
                     </span>
                 </div>
             </a>
-            <button className='item_btn' id={"btn_" + (props.index + id_diff)} 
-            onClick={() => {
-                if (props.User.token == 'None') {
-                    //переброс на поле логина
-                    props.setAuthClicked(true)
-                } else {
-                    //если залогинен - збс
-                    addToFavorites(props.index + id_diff, props.User.token);
-                }
-            }}>
-                {condition}
-            </button>
+            <MyButton id={props.obj.id} onClick={addToFavorites} text={condition} style={favoritesBtnStyle}/>
         </div>
     )
+}
+
+const favoritesBtnStyle = {
+    'margin-top': '5px',
+    'height': '25px',
 }
 
 export default Item

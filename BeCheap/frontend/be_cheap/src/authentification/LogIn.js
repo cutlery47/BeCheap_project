@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import '../styles/LogIn.css'
+import MyButton from '../templates/MyButton'
 
 function LogIn(props) {
   //данные на ввод
@@ -56,16 +57,28 @@ function LogIn(props) {
     }
   }, [formsData])
 
+  function closeLogin() {
+    props.setAuthClicked(false);
+    props.setLoginState(false);
+  }
+
+  function LoginData() {
+    const data = document.getElementsByClassName('input_auth')
+    const data_arr = []
+
+    for (let dat of data) {
+      data_arr.push(dat.value)
+    }
+    
+    setFormsData(data_arr);
+  }
+
   return (
     <div className="log_in">
       <div className="log_in_inner">
-        <button className="button_log" id="close" onClick={() => {
-          props.setAuthClicked(false);
-          props.setLoginState(false);}}> 
-          Close
-        </button>
+        <MyButton id={'close'} onClick={closeLogin} text={'Close'}/>
         <span id='title_log'>
-          Log into your account!
+          Log In!
         </span>
         <div className='fields'>
           <div className="field" id="login_field">
@@ -85,22 +98,22 @@ function LogIn(props) {
           </span>
 
         </div>
-          <button  className='button_log' id='submit_log' onClick={() => {
-            const data = document.getElementsByClassName('input_auth')
-            const data_arr = []
-
-            for (let dat of data) {
-              data_arr.push(dat.value)
-            }
-            
-            setFormsData(data_arr);
-            }}>
-              Log in!
-          </button>
-          <span id="error_msg"/>        
+          <span id="error_msg"/>  
+          <MyButton id='submit_log' text={'Log In'} onClick={LoginData} style={SubmitBtnStyle}/>      
       </div>
     </div>
   )
+}
+
+const SubmitBtnStyle = {
+  'min-width': '20px',
+  'position': 'absolute',
+  'left': '50%',
+  '-ms-transform': 'translate(-50%, -50%)',
+  'transform': 'translate(-50%, -50%)',
+  'bottom': '0.3%',
+  'padding-top': '5px',
+  'padding-bottom': '5px',
 }
 
 export default LogIn

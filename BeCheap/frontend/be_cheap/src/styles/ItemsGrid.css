@@ -2,34 +2,52 @@
     background-color: rgb(228, 228, 228);
     display: flex;
     flex-wrap: wrap;
+    width: 100%;
 }
 
 .item {
     display: inline-block;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    width: 285px;
-    min-height: 440px;
+    width: 235px;
+    min-height: 20%;
     margin-top: 10px;
-    margin-left: 13px;
+    margin-left: 7.5px;
+    margin-right: 7.5px;
+    margin-bottom: 20px;
     border-radius: 2px;
-}
-
-.item .item_image{
-    display: block;
-    height: 285px;
-    width: 285px;
-
 }
 
 .item .item_image img {
     background-color: gray;
     border-radius: 10px;
     display: block;
-    height: 285px;
-    width: 285px;
+    width: 100%
 
 }
 
+@media all and (max-width: 1500px){
+    .item {
+        width: 15%;
+    }
+}
+
+@media all and (max-width: 1000px){
+    .item {
+        width: 31.2%
+    }
+}
+
+@media all and (max-width: 750px){
+    .item {
+        width: 47%
+    }
+}
+
+@media all and (max-width: 520px){
+    .item {
+        width: 100%
+    }
+}
 .item .item_stuff {
     color: #000;
     text-decoration: none;
@@ -56,36 +74,33 @@
 
 .page_conts {
     position: relative;
-    align-content: center;
     height: 40px;
     width: 100%;;
 }
 
-.page_conts span {
-    font-size: 26px;
+.page_btns span {
+    font-size: 36px;
+    font-weight: bold;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    top: -2.75px;
-    left: 47.1%;
-    position: absolute;
+    position: relative;
+    bottom: 3px;
 }
 
 
 .page_btns img{
-    width: 28px;
+    width: 30px;
     cursor: pointer;
 }
 
-.page_btns .page_btn {
-    position: absolute;
+.page_btns{
+    display: block;
+    text-align: center;
 }
 
-.page_btns #btnL {
-    left: 48%
-}
 
-.page_btns #btnR {
-    right: 48%
-}
+
+
+
 
 
 

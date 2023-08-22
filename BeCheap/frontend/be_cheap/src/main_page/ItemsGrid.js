@@ -3,15 +3,13 @@ import '../styles/ItemsGrid.css'
 import Item from './Item'
 import arrowImgL from '../media/arrow_left.png'
 import arrowImgR from '../media/arrow_right.png'
+import Loading from '../templates/Loading'
 
 //наследуем класс от React.Component
 function ItemsGrid(props) {
     //==============================ITEMS=DATA===================================
-    let [item_data, setItems] = useState([]);
+    let [item_data, setItems] = useState();
     let [favorites_data, setFavorites] = useState([]) //пока что для хранения данных буду использовать массив, затем желательно перейти на set
-    //переменные, чтобы понимать, когда товары и избранное зафетчены (Я БЛЯТЬ НЕНАВИЖУ АСИНХРОННОЕ ПРОГРАММИРОВАНИЕ)
-    let [favs_loaded, setFavsLoaded] = useState(false) 
-    let [items_loaded, setItemsLoaded] = useState(false)
     
     //==============================PAGINATION===================================
     let [currentPage, setCurPage] = useState(1);
@@ -22,36 +20,29 @@ function ItemsGrid(props) {
     //http запрос на получение одежды
     function fetchClothes() {
       return fetch('http://127.0.0.1:8000/api/v1/items/' + currentPage)
-      .then((response) => {
-        if (response.ok) {
-          console.log('clothes fetched!')
-          return response.json()
-        } else {
-          console.log('error when fetching clothes data')
-        }
+      .then(response => {
+        console.log('clothes: ' + response.status)
+        return response.json()
       })
-      .then((data) => setItems(prettify_items(data)))
-      .then(setItemsLoaded(true)) //надо, чтобы правильно работали асинхронные запросы
+      .then(data => setItems(prettify_items(data)))
     }
   
     //собираем данные по избранному у юзера и записываем в массив 
     function fetchFavorites() {
-      fetch('http://127.0.0.1:8000/api/v1/' + props.User.name + '/favorites', {
+      return fetch('http://127.0.0.1:8000/api/v1/' + props.User.name + '/favorites', {
         method: 'GET',
         headers: {
           "Authorization": "Token " + props.User.token,
         }
       })
+      .catch(error => {
+        console.log(error)
+      })
       .then((response) => {
-        if (response.ok) {
-          console.log('favs fetched!')
-          return response.json()
-        } else {
-          console.log('error when fetching favorites data')
-        }
+        console.log('favs: ' + response.status)
+        return response.json()
       })
       .then((data) => setFavorites(prettify_favorites(data)))
-      .then(setFavsLoaded(true))
     }
   
     //конвертируем непонятную хуету в понятную хуету (Javascript moment num. 1)
@@ -71,9 +62,8 @@ function ItemsGrid(props) {
     //от избранного берем только имена, т.к. они уникальные
     function prettify_favorites(data) {
       const proper_favs = []
-  
       for (const dat of data) {
-        proper_favs.push(dat.item_name)
+        proper_favs.push(dat.id)
       }
   
       return proper_favs
@@ -81,26 +71,24 @@ function ItemsGrid(props) {
   
     //при перелистывании страниц - запрос на избранное и на одежду (если залогинен)
     //если не залогинен - просто перелистываем страницу
+    //я хз, но он все равно отправляет при запуске два запроса на одежду если юзер залогинен
+    //проебал весь вечер в попытках пофиксить - нихуя, поэтому оставим пока что
     useEffect(() => {
-      if (props.User.token !== 'None') {
-        fetchFavorites()
+      //также нужен рендер при выходе из профиля
+      if (props.profile_clicked == true) {
+        return 
+      }
+
+      if (props.User.token != 'None') {
+        fetchFavorites().then(fetchClothes())
       } else {
         fetchClothes()
       }
-    }, [props.User, currentPage])
+    }, [props.User, currentPage, props.profile_clicked])
 
-
-    //когда зафетичил избранное - фетч одежды
+    //когда зафетчил одежду - вставляем html кусок
     useEffect(() => {
-      if (favs_loaded !== false) {
-        fetchClothes()
-      }
-    }, [favorites_data])
-
-
-    //когда зафетчил одежду - вставляем html кусок (СУКА Я БЛЯТЬ ГЕНИЙ (делал это часов 10))
-    useEffect(() => {
-      if (items_loaded !== false) {
+      if (item_data != undefined) {
         setRows(render_items(item_data))
       }
     }, [item_data])
@@ -114,7 +102,7 @@ function ItemsGrid(props) {
       for (let i = 0; i < proper_objects.length; i += 1) {
         rows.push(
           <Item 
-          index={(currentPage - 1) * 20 + i} obj={proper_objects[i]} 
+          obj={proper_objects[i]} 
           authorize={props.authorize} setAuthClicked={props.setAuthClicked}
           User={props.User} setUser={props.setUser}
           // currentPage={currentPage} setCurPage={setCurPage}
@@ -127,23 +115,32 @@ function ItemsGrid(props) {
       return rows;
     }
 
+    //экран загрузки пока данные фетчаются
+    if (!item_data) {
+      return (Loading())
+    }
+
     return (
       <div className="clothing">
         {rows}
         <div className="page_conts">
           <div className="page_btns">
-            
             <img src={arrowImgL} id="btnL" className="page_btn" onClick={() => {
               // перелистывание страницы
               if (currentPage > 1) {
                 setCurPage(currentPage - 1)
+                setItems()
                 window.scrollTo(0, 0)
               } 
               }}>
             </img>
+            <span id='page'>
+              {currentPage} 
+            </span>
             <img src={arrowImgR} id="btnR" className="page_btn" onClick={() => {
               //перелистывание страницы
               setCurPage(currentPage + 1)
+              setItems()
               window.scrollTo(0, 0)}}>
             </img>
           </div>

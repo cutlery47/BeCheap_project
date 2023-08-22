@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import '../styles/SignUp.css'
+import MyButton from '../templates/MyButton'
 
 function SignUp(props) {
   let [formsData, setFormsData] = useState([])
@@ -83,14 +84,23 @@ function SignUp(props) {
     }
   }, [formsData])
 
+  function SubmitData() {
+    const data = document.getElementsByClassName('input_auth')
+    const data_arr = []
+
+    for (let dat of data) {
+      data_arr.push(dat.value)
+    }
+    
+    setFormsData(data_arr);
+  }
+
   return (
     <div className="sign_up">
       <div className="sign_up_inner">
-        <button className="button_sign" id="close" onClick={() => props.setAuthClicked(false)}> 
-          Close
-        </button>
+        <MyButton id="close" onClick={props.setAuthClicked} onClickVal={false} text={"Close"}/>
         <span id='title'>
-          Create an account!
+          Sign Up!
         </span>
         <div className='fields'>
           <div className="field" id="login_field">
@@ -116,24 +126,23 @@ function SignUp(props) {
           </span>
 
         </div>
-          <button  className='button_sign' id='submit' onClick={() => {
-
-            const data = document.getElementsByClassName('input_auth')
-            const data_arr = []
-
-            for (let dat of data) {
-              data_arr.push(dat.value)
-            }
-            
-            setFormsData(data_arr);
-
-            }}>
-              Sign Up!
-          </button>
+          
           <span id="error_msg"/>
+          <MyButton id='submit' onClick={SubmitData} text={'Sign Up'} style={SubmitBtnStyle}/>
       </div>
     </div>
   )
+}
+
+const SubmitBtnStyle = {
+    'min-width': '20px',
+    'position': 'absolute',
+    'left': '50%',
+    '-ms-transform': 'translate(-50%, -50%)',
+    'transform': 'translate(-50%, -50%)',
+    'bottom': '0.3%',
+    'padding-top': '5px',
+    'padding-bottom': '5px',
 }
 
 export default SignUp

@@ -3,13 +3,18 @@ import ProfileData from './ProfileData'
 import ProfileEdit from './ProfileEdit'
 
 function ProfilePopup(props) {
-    //всякая поебень реально
+    //само окно профиля
     let [forms, setForms] = useState(<></>);
 
     //статус кнопки редактирования
     let [doEdit, setEdit] = useState(false);
 
     useEffect(() => {
+      //проверка на логин
+      if (props.User.token == 'None' && props.profile_clicked == true) {
+        props.setAuthClicked(true)
+      } 
+      
       if (doEdit == false) {
         //при нажатии выводим хуйню
         setForms(<ProfileData 
@@ -24,6 +29,7 @@ function ProfilePopup(props) {
           setEdit={setEdit}
         />)
       }
+      
     }, [props.profile_clicked, doEdit])
 
     return (props.profile_clicked) ? (

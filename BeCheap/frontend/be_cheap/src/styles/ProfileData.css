@@ -13,7 +13,6 @@
 
 .profile_data_inner {
     border-radius: 15px;
-    border: 3px solid #000;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     position: relative;
     display: flex;
@@ -22,54 +21,15 @@
     background-color: #FFF;
 }
 
-.btn_profile {
-    position: absolute; 
-    appearance: button;
-    background-color: #000;
-    background-image: none;
-    border: 1px solid #000;
-    border-radius: 4px;
-    box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    font-family: Arial,sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 0px;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    overflow: visible;
-    padding: auto;
-    text-align: center;
-    text-transform: none;
-    touch-action: manipulation;
-    user-select: none;
-    -webkit-user-select: none;
-    vertical-align: middle;
-    white-space: nowrap;
-}
+@media all and (max-width: 650px){
+    .profile_data_inner {
+        padding: 300px 45vw 300px 45vw;
+    }
 
-.btn_profile:focus {
-    text-decoration: none;
-  }
-  
-.btn_profile:hover {
-text-decoration: none;
-}
-
-.btn_profile:active {
-box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
-outline: 0;
-}
-
-.btn_profile:not([disabled]):active {
-box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
-transform: translate(2px, 2px);
-}
-
-@media (min-width: 768px) {
-    .btn_profile {
-        padding: 12px 50px;
+    #close_profile {
+        padding-left: 0px;
+        padding-right: 0px;
+        width: 10px;
     }
 }
 
@@ -77,39 +37,34 @@ transform: translate(2px, 2px);
     position: absolute;
     top: 5px;
     right: 10px;
-    padding-right: 7px;
-    padding-left: 7px;
+    width: 80px;
+    padding-bottom: 3px;
+    padding-top: 3px;
 }
 
-#edit_profile {
-    position: relative;
-    width: 100%;    
-    margin-top: 30px;
-    padding : 10px;
-    padding-right: 1px;
-    padding-bottom: 12px;
-    padding-top: 12px;
+#edit_profile { 
+    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
-
 
 .forms {
     background-color: gray;
     color: rgb(260, 260, 260);
     border-radius: 5px;
     position: absolute;
-    width: 25%;
-    min-height: 50%;
+    width: 100%;
+    min-height: 310px;
     text-align: center;
-    padding-left: 37.5%;
-    padding-right: 37.5%;
-    padding-top: 3.5%;
-    padding-bottom: 3.5%;
+    padding-top: 20px;
+    padding-bottom: 20px;
     left: 0;
     top: 0;  
 }
 
 .forms #user_img {
-    /* position: absolute; */
     border: 2px solid #000;
     left: 10px;
     top: 10px;
@@ -132,7 +87,7 @@ transform: translate(2px, 2px);
 
 .favorite_items .title_2 {
     margin-top: 6px; 
-    margin-left: 2%;   
+    margin-left: 10px;   
 }
 
 .forms .title_3 {
@@ -141,11 +96,10 @@ transform: translate(2px, 2px);
 }
 
 .favorite_items {
-    border-top: 1px solid #000;
     color: rgb(260, 260, 260);
     width: 100%;
     top: 56.5%;
-    height: 43.5%;
+    height: 47.5%;
     border-bottom-right-radius: 15px;
     border-bottom-left-radius: 15px;
     left: 0px;
@@ -160,8 +114,77 @@ transform: translate(2px, 2px);
     border-radius: 15px;
     width: 96%;
     left: 2%;
-    height: 200px;
+    height: 225px;
 
     color: black;
     background-color: rgb(228, 228, 228);
+}
+
+.pr_item img{
+    width: 122.5px;
+    border-radius: 15px;
+}
+
+.pr_item {
+    display: block;
+    width: 122.5px;
+    padding-top: 10px;
+    padding-left: 6%;
+    padding-right: 6%;
+}
+
+.pr_item_txt {
+    font-size: 13px;
+    color: black;
+}
+
+.pr_item_stuff {
+    text-decoration: none;
+}
+
+.fav_clothes {
+    display: flex;
+}
+
+.items_scroll img{
+    width: 25px;
+    cursor: pointer;
+}
+
+.items_scroll #img_1 {
+    position: absolute;
+    left: 6px;
+    top: 46%;
+}
+
+.items_scroll #img_2 {
+    position: absolute;
+    right: 6px;
+    top: 46%;
+}
+
+@media all and (max-width: 650px) {
+    .pr_item img {
+        width: 100%
+    }
+
+    .pr_item_txt {
+        font-size: 12px;
+    }
+
+    .items_scroll img{
+        width: 15px;
+    }
+    
+
+    #close_profile {
+        width: 45px;
+    }
+    
+}
+
+@media all and (max-width: 650px) {
+    .pr_item {
+        width: 22%;
+    }
 }

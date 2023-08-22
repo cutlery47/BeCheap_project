@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import ProfileItem from './ProfileItem';
-import '../styles/ProfileFavorites.css'
 import arrowImgL from '../media/arrow_left.png'
 import arrowImgR from '../media/arrow_right.png'
+import '../styles/ProfileData.css'
 
 function ProfileFavorites(props) {
   //массив с избранными товарами для юзера
@@ -14,16 +14,16 @@ function ProfileFavorites(props) {
 
   //при открытии профиля - сразу фетч избранного
   useEffect(() => {
-    fetchData();
-  }, [props.profile_clicked])
+    fetchFavorites();
+  }, [props.profile_clicked, favsPage])
 
   //обновляем одежду после получения данных
   useEffect(() => {
     setClothes(render_items(favorites))
-  }, [favorites, favsPage])
+  }, [favorites])
 
   //запрос на избранное
-  function fetchData() {
+  function fetchFavorites() {
     if (props.User.name != 'None') {
       const url = 'http://127.0.0.1:8000/api/v1/' + props.User.name + '/favorites'
       fetch(url, {
@@ -34,6 +34,7 @@ function ProfileFavorites(props) {
         }
       }).then((response) => {
         if (response.ok) {
+          console.log('profile favorites fetched successfully')
           return response.json()
         } else {
           console.log(response)
@@ -71,7 +72,9 @@ function ProfileFavorites(props) {
           rows.push(
             //товар
             <ProfileItem
-            index={i} obj={proper_objects[i]}
+            User={props.User}
+            obj={proper_objects[i]}
+            favorites={favorites}
             />
           )
         }

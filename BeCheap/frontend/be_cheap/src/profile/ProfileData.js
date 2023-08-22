@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import '../styles/ProfileData.css'
 import user_img from'../media/baga.jpg'
 import ProfileFavorites from './ProfileFavorites'
+import MyButton from '../templates/MyButton'
 
 function ProfileData(props) {
     return (
@@ -11,12 +12,7 @@ function ProfileData(props) {
                 <h1 className='title_3'>Profile</h1>
                 <img src={user_img} id='user_img' alt='img'/>
                 <h1 className='title_1'>{props.User.name}</h1>
-                <button className='btn_profile' id='edit_profile' onClick={() => {
-                    //поле редактирования
-                    props.setEdit(true)
-                    }}>
-                    Edit Profile
-                </button>
+                <MyButton id={'edit_profile'} onClick={props.setEdit} onClickVal={true} text={'Edit profile'}/>
             </div>
             <div className='favorite_items'>
                 <h2 className='title_2'>
@@ -30,12 +26,7 @@ function ProfileData(props) {
                 </div>
             </div>
             <div className='profile_btns'>
-                <button className='btn_profile' id='close_profile' onClick={() => {
-                    // выход
-                    props.setProfileClicked(false);
-                }}>
-                    Close
-                </button>
+                <MyButton id={'close_profile'} onClick={props.setProfileClicked} onClickVal={false} text={'Close'}/>
             </div>
             
         </div>

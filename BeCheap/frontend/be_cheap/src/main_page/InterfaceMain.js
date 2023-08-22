@@ -20,6 +20,7 @@ function InterfaceMain() {
     telegram: 'None',
     date_joined: 'None',
   })
+  let [usr_is_loaded, setUsrLoaded] = useState(false);
 
   //при запуске сайта проверка на токен в куках, если токен есть - обновляем стейт юзера
   useEffect(() => {
@@ -38,9 +39,9 @@ function InterfaceMain() {
   //если у юзера в атрибутах внезапно появился токен - добавлем куки с токеном и ником для автоматической авторизации (см. пред.)
   useEffect(() => {
     if (User.token != "None") {
-      document.getElementById("sign_btn_txt").textContent="Change account"
+      document.getElementById("auth_btn").textContent="Change account"
       Cookies.set('token', User.token)
-      document.getElementById("usrname_txt").textContent="Profile: " + User.name;
+      document.getElementById("profile_btn").textContent="Profile: " + User.name;
       Cookies.set('username', User.name);
     }
   }, [User])
@@ -56,7 +57,9 @@ function InterfaceMain() {
         {/* сетка товаров */}
         <ItemsGrid 
         authorize={authorize} setAuthClicked={setAuthClicked}
-        User={User} setUser={setUser}/>
+        User={User} setUser={setUser}
+        setUsrLoaded={setUsrLoaded} usr_is_loaded={usr_is_loaded}
+        profile_clicked={profile_clicked} setProfileClicked={setProfileClicked}/>
       </div>
       <div className='popups'>
         <div className='auth_popup'>
@@ -68,6 +71,7 @@ function InterfaceMain() {
         <div className='profile_popup'>
           {/* профиль */}
           <ProfilePopup
+          authorize={authorize} setAuthClicked={setAuthClicked}
           profile_clicked={profile_clicked} setProfileClicked={setProfileClicked}
           User={User} setUser={setUser}/>
         </div>

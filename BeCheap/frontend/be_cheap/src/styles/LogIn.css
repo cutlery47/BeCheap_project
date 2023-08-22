@@ -13,25 +13,39 @@
 
 .log_in_inner {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-weight: bold;
     border-radius: 15px;
     border: 3px solid #000;
     position: relative;
     padding: 300px 200px 300px 200px;
-    max-width: 640px;
+    max-width: 50px;
     background-color: rgb(200, 200, 200);
 }
 
-.log_in_inner .close_button {
-    position: absolute;
-    top: 16px;
-    right: 16px;
+@media all and (max-width: 500px){
+    .log_in_inner{
+        padding: 300px 35vw 300px 35vw;
+    }
 }
 
+@media all and (max-width: 400px){
+    .log_in_inner {
+        padding: 300px 40vw 300px 40vw;
+    }
+}
+
+@media all and (max-width: 300px){
+    .log_in_inner {
+        padding: 300px 45vw 300px 45vw;
+    }
+}
 #title_log {
-    font-size: 30px ;
+    font-size: 20px;
     top: 60px;
-    left: 15%;
     position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 #error_msg {
@@ -44,84 +58,17 @@
     color: red;
 }
 
-.button_log {
-    position: absolute; 
-    appearance: button;
-    background-color: #000;
-    background-image: none;
-    border: 1px solid #000;
-    border-radius: 4px;
-    box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 0px;
-  
-    overflow: visible;
-    text-align: center;
-    text-transform: none;
-    touch-action: manipulation;
-    user-select: none;
-    -webkit-user-select: none;
-    vertical-align: middle;
-    white-space: nowrap;
-  }
-
   .log_in_inner #close {
     position: absolute;
-    padding-right: 22.5px;
-    padding-left: 22.5px;
     top: 5px;
     right: 10px;
-  }
-
-  .log_in_inner .login_link {
-    position: absolute;
-    left: 110px
-  }
-  
-  .button_log:focus {
-    text-decoration: none;
-  }
-  
-  .button_log:hover {
-    text-decoration: none;
-  }
-  
-  .button_log:active {
-    box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
-    outline: 0;
-  }
-  
-  .button_log:not([disabled]):active {
-    box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
-    transform: translate(2px, 2px);
-  }
-  
-  @media (min-width: 768px) {
-    .button_log {
-      padding: 12px 50px;
-    }
-  }
-
-  .button_log #close {
-    position: absolute;
-    padding-right: 5px;
-    padding-left: 5px;
-    top: 5px;
-    right: 10px;
-  }
-
-  #submit_log {
-    position: absolute;
-    bottom: 15px;
-    left: 33%;
+    width: 80px;
+    padding-bottom: 3px;
+    padding-top: 3px;
   }
 
   .input_auth {
     background-color: rgb(250, 250, 250);
     border-radius: 5px;
+    
   }

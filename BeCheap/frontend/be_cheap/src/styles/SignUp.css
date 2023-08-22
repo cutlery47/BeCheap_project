@@ -13,13 +13,32 @@
 
 .sign_up_inner {
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
     border-radius: 15px;
-    border: 3px solid #000;
+    border: 3px solid #000;;
     
     position: relative;
     padding: 300px 200px 300px 200px;
     max-width: 50px;
     background-color: rgb(200, 200, 200);
+}
+
+@media all and (max-width: 500px){
+    .sign_up_inner {
+        padding: 300px 35vw 300px 35vw;
+    }
+}
+
+@media all and (max-width: 400px){
+    .sign_up_inner {
+        padding: 300px 40vw 300px 40vw;
+    }
+}
+
+@media all and (max-width: 300px){
+    .sign_up_inner {
+        padding: 300px 45vw 300px 45vw;
+    }
 }
 
 .sign_up_inner .close_button {
@@ -37,112 +56,59 @@
     text-align: center;
 }
 
-#login_field {
+#login_field {  
     top: 130px;
-    left: 108px;
-    width: 200px;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 #passwrd_field {
     top: 260px;
-    left: 108px;
-    width: 200px;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 #passwrd_field_2 {
     top: 390px;
-    left: 108px;
-    width: 200px;
-}
-
-.submit_button {
     position: absolute;
-    bottom: 10px;
-    left: 158px;
-    width: 100px;
-    height: 25px;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);padding-left: 0vw;
 }
-
 .login_link {
+    text-align: center;
+    width: 80%;
     position: absolute;
-    left: 28.5%;
-    bottom: 50px;
+    bottom: 8%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);padding-left: 0vw;
     color: black;
     text-decoration: underline;
     cursor: pointer;
 }
 
 #title {
-    font-size: 30px ;
-    top: 60px;
-    left: 21%;
-    position: absolute;
-}
-
-.button_sign {
-    min-width: 20%;
-    position: absolute; 
-    appearance: button;
-    background-color: #000;
-    background-image: none;
-    border: 1px solid #000;
-    border-radius: 4px;
-    box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
-    box-sizing: border-box;
-    color: #fff;
-    cursor: pointer;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 0px;
-  
-    overflow: visible;
-    padding: auto;
     text-align: center;
-    text-transform: none;
-    touch-action: manipulation;
-    user-select: none;
-    -webkit-user-select: none;
-    vertical-align: middle;
-    white-space: nowrap;
-  }
-  
-  .button_sign:focus {
-    text-decoration: none;
-  }
-  
-  .button_sign:hover {
-    text-decoration: none;
-  }
-  
-  .button_sign:active {
-    box-shadow: rgba(0, 0, 0, .125) 0 3px 5px inset;
-    outline: 0;
-  }
-  
-  .button_sign:not([disabled]):active {
-    box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
-    transform: translate(2px, 2px);
-  }
-  
-  @media (min-width: 768px) {
-    .button_sign {
-      padding: 12px 50px;
-    }
-  }
+    font-size: 20px ;
+    top: 60px;
+    position: absolute;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
 
   .sign_up_inner #close {
     position: absolute;
-    padding-right: 5px;
-    padding-left: 5px;
     top: 5px;
     right: 10px;
-  }
-
-  #submit {
-    position: absolute;
-    bottom: 15px;
-    left: 32%;
+    width: 80px;
+    padding-bottom: 3px;
+    padding-top: 3px;
   }
 
   .input_auth {
