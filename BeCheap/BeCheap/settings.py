@@ -251,3 +251,7 @@ CACHES = {
 }
 
 
+BOT_URL = 't.me/govno_test_govno_bot'
+BOT_KEY = '6638029045:AAHnRYwo453e-nFKvinA6DKN3fHAg-Q4wHw'
+BOT_TOKEN_LENGTH = 12
+

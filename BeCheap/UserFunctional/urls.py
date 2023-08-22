@@ -10,5 +10,6 @@ urlpatterns = [
     path('items/add/<int:item_id>', views.AddToFavorite.as_view()),
     path('category/add/<int:category_id>', views.AddToSubscription.as_view()),
     path('user/favorites', views.GiveUserFavorites.as_view()),
-    path('user/categories', views.GiveUserCategories.as_view())
+    path('user/categories', views.GiveUserCategories.as_view()),
+    path('user/get_bot_url', views.GetBotUrl.as_view())
 ]

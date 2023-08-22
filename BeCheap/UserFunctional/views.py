@@ -9,8 +9,9 @@ from mainPage.models import Items, Categories
 from mainPage.serializer import ItemsSerializer, CategorySerializer
 from rest_framework import permissions, generics, viewsets, status
 from rest_framework.authtoken.admin import User
-
-
+from .services_userfunctional.generate_link import generate_link_with_start_parametre
+from .services_userfunctional.create_token_func import create_token
+from .models import Profile
 
 
 class AddToFavorite(APIView):
@@ -56,3 +57,23 @@ class GiveUserCategories(APIView):
         user_object = get_object_or_404(User, pk=request.user.id)
         serializer = CategorySerializer(user_object.subscriptions_categories.all(), many=True)
         return Response(serializer.data)
+
+
+class GetBotUrl(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get(self, request):
+        try:
+            query = Profile.objects.get(user_id=request.user.id)
+            return Response({'link': f'{settings.BOT_URL}'})
+        except Profile.DoesNotExist:
+            token = cache.get(request.user.id, )
+            if token:
+                bot_url = generate_link_with_start_parametre(settings.BOT_URL, token)
+                return Response({'link': bot_url})
+            else:
+                token = create_token(settings.BOT_TOKEN_LENGTH)
+                bot_url = generate_link_with_start_parametre(settings.BOT_URL, token)
+                cache.set(request.user.id, token)
+                cache.set(token, request.user.id)
+                return Response({'link': bot_url})

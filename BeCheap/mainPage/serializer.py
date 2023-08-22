@@ -6,7 +6,8 @@ class ItemsSerializer(serializers.ModelSerializer):
     item_category = serializers.SlugRelatedField(slug_field='category_name', read_only=True)
     class Meta:
         model = Items
-        fields = ['item_name',
+        fields = ['id',
+                  'item_name',
                   'item_brand',
                   'item_category',
                   'item_cur_price',

@@ -85,33 +85,54 @@ class CompareParseWithModel:
 class ParsingFunctional(CompareParseWithModel):
     def __init__(self, data: typing.Dict[str, typing.Dict[str, str]]) -> None:
         super().__init__(data)
-        self.emails_for_categories = []
-        self.emails_for_items = []
+        self.telegram_sub_notifications_list = []
+        self.telegram_favorites_notifications_list = []
 
     """Наполняем email'ы для увеомлений об обновленных данных"""
 
     """Все очень сырое """
 
-    def get_emails_for_categories(self):
+    def get_user_telegram_id(self, user_entity):
+        telegram_profile = user_entity.user_telegram.values_list('telegram_user_id', 'is_telegram_subscriber')
+        if telegram_profile: # есть ли пользователь в тг боте
+            user_telegram_id = telegram_profile.get()[0]
+            user_permission = telegram_profile.get()[1]
+            if user_permission: # хочет ли юзер получать уведомления
+                return user_telegram_id
+            return None
+        return None
+
+    def create_sub_notification_info_for_telegram(self, user, category):
+        user_telegram_id = self.get_user_telegram_id(user)
+        if user_telegram_id: # если юзер есть в боте, то все норм
+            self.telegram_sub_notifications_list.append((user_telegram_id, category))
+
+    def get_telegram_sub_notifications_list(self):
         if self.new_categories_list:
             for category in self.new_categories_list:
                 try:
                     category = Categories.objects.get(category_name=category)
                     for user in category.subscriptions.all():
-                        self.emails_for_categories.append((user.username, user.email, category))
+                        self.create_sub_notification_info_for_telegram(user, category) # кладёт уведомления для телеги
                 except Categories.DoesNotExist:
                     "Создает новую категорию, просто чтобы наполнить базу данных"
                     Categories.objects.create(category_name=category)
 
-            return self.emails_for_categories
+            return self.telegram_sub_notifications_list
         return None
 
-    def get_emails_for_items(self):
+    def create_item_notification_info_for_telegram(self, user, item, message):
+        user_telegram_id = self.get_user_telegram_id(user)
+        if user_telegram_id: # если юзер есть в боте, то все норм
+            self.telegram_favorites_notifications_list.append((user_telegram_id,
+                                                               message,
+                                                               item.item_name,
+                                                               item.item_image,))
+
+    def get_telegram_favorites_notifications_list(self):
         if self.updated_items:
             for item, message in self.updated_items:
                 for user in item.favorites.all():
-                    self.emails_for_items.append((user.username, user.email, message, item.item_name))
-            return self.emails_for_items
+                    self.create_item_notification_info_for_telegram(user, item, message)
+            return self.telegram_favorites_notifications_list
         return None
-
-
