@@ -1,0 +1,6 @@
+/venv/
+/main.py
+/keepitcheap/mainfunc/migrations/0001_initial.py
+/.idea/
+.dockerignore
+/pg_data/

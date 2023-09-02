@@ -1,0 +1,63 @@
+services:
+  keepitcheap-app:
+    build:
+      context: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./keepitcheap:/keepitcheap
+    environment:
+      - DB_HOST=postgres_data
+      - DB_NAME=db_name
+      - DB_USER=db_user
+      - DB_PASSWORD=password_postgres
+    command: >  
+      sh -c "python manage.py runserver 0.0.0.0:8000"
+    depends_on:
+      - postgres_data
+
+  postgres_data:
+    image: postgres:15.4-alpine3.18
+    environment:
+      - POSTGRES_DB=db_name
+      - POSTGRES_USER=db_user
+      - POSTGRES_PASSWORD=password_postgres
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data/
+  redis:
+    image: redis:7.2.0-alpine
+    hostname: redis
+
+  celery_worker:
+    build:
+      context: .
+    environment:
+      - DB_HOST=postgres_data
+      - DB_NAME=db_name
+      - DB_USER=db_user
+      - DB_PASSWORD=password_postgres
+    hostname: worker
+    entrypoint: celery
+    command: -A keepitcheap.celery_app:app worker --loglevel=info --pool=solo
+    volumes:
+      - ./keepitcheap:/keepitcheap
+    links:
+      - redis
+    depends_on:
+      - redis
+      - postgres_data
+
+  flower:
+    build:
+      context: .
+    hostname: flower
+    entrypoint: celery
+    command: -A keepitcheap.celery_app:app flower
+    volumes:
+      - ./keepitcheap:/keepitcheap
+    links:
+      - redis
+    depends_on:
+      - redis
+    ports:
+      - "1337:5555"
