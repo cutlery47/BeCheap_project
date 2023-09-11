@@ -4,3 +4,5 @@
 /.idea/
 .dockerignore
 /pg_data/
+.env
+postgres.env
